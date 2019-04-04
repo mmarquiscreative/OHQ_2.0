@@ -1,23 +1,43 @@
-var resultsEmail = {
+function genResultsEmailHtml(){
+    var resultsEmail = {
+    // ** WP Menu Items:
+    // email_ctaTxt
     ctaTxt: "Call today",
+    
+    // email_hasCoupon (checkbox to include coupon)
+    hasCoupon: false,
+    
+    // email_couponTxt
     couponTxt: "$500 Off an AGX5, 7 or 9 two-device hearing system. Expires 05.31.19.",
+    
+    // email_buttonTxt
     buttonTxt: "Schedule your appointment",
+        
+    // email_buttonUrl
     buttonUrl: "https://www.agxhearing.com/",
     
     useWebsite: true,
+        
+    // email_websiteUrl
     websiteUrl: "https://www.google.com",
     websiteIconSrc: "IconPlaceholder.png",
     
     useFb: true,
+        
+    // email_fbUrl
     fbUrl: "",
     fbIconSrc: "",
     
     useTwitter: true,
+        
+    // email_twitterUrl
     twitterUrl: "",
     twitterIconSrc: "",
     
+    // email_logoSrc
     logoSrc: "AwesomeAudiology_Reversed.png",
     
+    // ** Pre-filled by quiz
     quizSectionName: "Listening Environments",
     quizSectionColor: "#008aab",
     quizSectionShade: "#00738f",
@@ -84,7 +104,14 @@ resultsSectionBuild (resultsEmail.speechPercent, resultsEmail.speechSectionName,
 
 
 // ** 3. Build out CTA section HTML
-var ctaHTML = ("</td></tr><tr><td><table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"border-collapse= collapse; max-width: 540px;\"><tr><td align=\"center\" style=\"color: #000000; font-size: 20px; padding: 10px 10px 10px 10px;\">" + resultsEmail.ctaTxt + "</td></tr><tr><td align=\"center\" style=\"color: #000000; font-size: 20px; padding: 10px 10px 10px 10px; border: 2px dashed #707070;\">" + resultsEmail.couponTxt + "</td></tr><tr width=\"100%\"><td align=\"center\" width=\"100%\" style=\"font-size: 20px; padding: 20px 10px 20px 10px;\"><a href=\"" + resultsEmail.buttonUrl + "\" style=\"color: #ffffff; background-color: #008aab; padding: 10px 10px 10px 10px; border-bottom: 3px solid #00738f;\">" + resultsEmail.buttonTxt + "</a></td></tr></table></td></tr>");
+var tempCouponTxt = "";
+if(resultsEmail.hasCoupon){
+    tempCouponTxt = "<tr><td align=\"center\" style=\"color: #000000; font-size: 20px; padding: 10px 10px 10px 10px; border: 2px dashed #707070;\">" + resultsEmail.couponTxt + "</td></tr>";
+} else {
+    tempCouponTxt = "";
+};
+
+var ctaHTML = ("</td></tr><tr><td><table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"border-collapse= collapse; max-width: 540px;\"><tr><td align=\"center\" style=\"color: #000000; font-size: 20px; padding: 10px 10px 10px 10px;\">" + resultsEmail.ctaTxt + "</td></tr>" + tempCouponTxt + "<tr width=\"100%\"><td align=\"center\" width=\"100%\" style=\"font-size: 20px; padding: 20px 10px 20px 10px;\"><a href=\"" + resultsEmail.buttonUrl + "\" style=\"color: #ffffff; background-color: #008aab; padding: 10px 10px 10px 10px; border-bottom: 3px solid #00738f;\">" + resultsEmail.buttonTxt + "</a></td></tr></table></td></tr>");
 
 emailHTML = (emailHTML + ctaHTML);
 
@@ -196,5 +223,6 @@ function assembleIconBlocks(){
 };
 
 console.log(emailHTML);
+};
 
 

@@ -48,7 +48,7 @@ resultsObj.OHQ_audio.toneTest_2000.load();
     // an reference object for the current audio filepath / updating it
     tone.curToneObj = {
         freq: '2000',
-        srcPath: '/wp-content/plugins/agx-hearing-test/sounds/2000.mp3'
+        srcPath: '/wp-content/plugins/OHQ_2.0/sounds/2000.mp3'
     }
 
     // starts audio if test has not already been completed

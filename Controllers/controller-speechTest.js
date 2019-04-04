@@ -57,7 +57,7 @@ angular.module('formApp').controller('SpeechTest', ['$scope', 'resultsObj', 'ans
 
     /* speech.bgNoiseSettings = {
         loopBool: 'true',
-        srcPath: '/wp-content/plugins/agx-hearing-test/sounds/SpeechTest_OHQ_Noise_Lvl1.mp3'
+        srcPath: '/wp-content/plugins/OHQ_2.0/sounds/SpeechTest_OHQ_Noise_Lvl1.mp3'
     } */
 
 

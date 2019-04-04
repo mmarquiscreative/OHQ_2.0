@@ -100,9 +100,9 @@ var preloadWords = [ 'Bean', 'Chalk', 'Goose'];
 
 
     //// SRC CHANGE
-    stage.curToneSrc = '/wp-content/plugins/agx-hearing-test/sounds/SpeechTest_OHQ_Noise_Lvl1.mp3';
+    stage.curToneSrc = '/wp-content/plugins/OHQ_2.0/sounds/SpeechTest_OHQ_Noise_Lvl1.mp3';
     var srcCurTone = 0;
-    var toneAudio = new Audio('/wp-content/plugins/agx-hearing-test/sounds/ToneTest_OHQ_2000_Hz.mp3');
+    var toneAudio = new Audio('/wp-content/plugins/OHQ_2.0/sounds/ToneTest_OHQ_2000_Hz.mp3');
     
    
     
@@ -112,7 +112,7 @@ var preloadWords = [ 'Bean', 'Chalk', 'Goose'];
         if(srcCurTone < 10){
                     srcCurTone += 2;
 
-        toneAudio.src = '/wp-content/plugins/agx-hearing-test/sounds/ToneTest_OHQ_' + srcCurTone + '000_Hz.mp3';
+        toneAudio.src = '/wp-content/plugins/OHQ_2.0/sounds/ToneTest_OHQ_' + srcCurTone + '000_Hz.mp3';
         toneAudio.play();
         } else {
             toneAudio.pause();
@@ -157,10 +157,58 @@ stage.doublePlayNext = function(){
     /* START: Modal Functionality */
     stage.cta_text = document.querySelector('#cta_text').textContent;
     stage.cta_url = document.querySelector('#cta_url').textContent;
+      resultsObj.resultsEmail.ctaTxt = stage.email_ctaTxt;
+    
+    
+    stage.ohq_email_ctaTxt = document.querySelector('#ohq_email_ctaTxt').textContent;
+      resultsObj.resultsEmail.ctaTxt = stage.ohq_email_ctaTxt;
+    
+    
+    stage.ohq_email_hasCoupon = document.querySelector('#ohq_email_hasCoupon').textContent;
+    
+    if(stage.ohq_email_hasCoupon === "agx_includeCoupon_Yes"){
+        resultsObj.resultsEmail.hasCoupon = true;
+    } else {
+                resultsObj.resultsEmail.hasCoupon = false;
 
+    };
+      
+    
+    
+    stage.ohq_email_couponTxt = document.querySelector('#ohq_email_couponTxt').textContent;
+      resultsObj.resultsEmail.couponTxt = stage.ohq_email_couponTxt;
+    
+    
+    stage.ohq_email_buttonTxt = document.querySelector('#ohq_email_buttonTxt').textContent;
+      resultsObj.resultsEmail.buttonTxt = stage.ohq_email_buttonTxt;
+    
+    
+    stage.ohq_email_buttonUrl = document.querySelector('#ohq_email_buttonUrl').textContent;
+      resultsObj.resultsEmail.buttonUrl = stage.ohq_email_buttonUrl;
+    
+    
+    stage.ohq_email_websiteUrl = document.querySelector('#ohq_email_websiteUrl').textContent;
+      resultsObj.resultsEmail.websiteUrl = stage.ohq_email_websiteUrl;
+    
+    
+    stage.ohq_email_fbUrl = document.querySelector('#ohq_email_fbUrl').textContent;
+      resultsObj.resultsEmail.fbUrl = stage.ohq_email_fbUrl;
+    
+    
+    stage.ohq_email_twitterUrl = document.querySelector('#ohq_email_twitterUrl').textContent;
+      resultsObj.resultsEmail.twitterUrl = stage.ohq_email_twitterUrl;
+    
+    
+    stage.ohq_email_logoSrc = document.querySelector('#ohq_email_logoSrc').textContent;
+      resultsObj.resultsEmail.logoSrc = stage.ohq_email_logoSrc;
+    
+    
     resultsObj.cta_text = stage.cta_text;
     resultsObj.cta_url = stage.cta_url;
 
+    console.log(resultsObj.resultsEmail);
+  
+    
     // Modal Classes
     stage.modalClass = 'ohq-modal';
     stage.modalBtnOpen = 'btn-open';

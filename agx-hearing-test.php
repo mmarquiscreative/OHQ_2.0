@@ -41,6 +41,22 @@ function agx_hearing_test($content) {
     } else {
         $agx_useNinja_string = $agx_useNinja_no;
     };
+    
+        $ohq_email_ctaTxt = get_option('email_ctaTxt');
+    
+    // checkbox
+        $ohq_email_hasCoupon = get_option('email_hasCoupon');
+        $ohq_email_couponTxt = get_option('email_couponTxt');
+    
+        $ohq_email_buttonTxt = get_option('email_buttonTxt');
+        $ohq_email_buttonUrl = get_option('email_buttonUrl');
+    
+    // Check length to determin if using (if .length > 0 useWebsite = true;)
+        $ohq_email_websiteUrl = get_option('email_websiteUrl');
+        $ohq_email_fbUrl = get_option('email_fbUrl');
+        $ohq_email_twitterUrl = get_option('email_twitterUrl');
+    
+        $ohq_email_logoSrc = get_option('email_logoSrc');
 
     echo '<div style="font-size: ';
     echo $font_baseline;
@@ -55,6 +71,24 @@ function agx_hearing_test($content) {
     echo $cta_text;
     echo '</p> <p style="display: none;" id="cta_url">';
     echo $cta_url;
+     echo '</p> <p style="display: none;" id="ohq_email_ctaTxt">';
+    echo $ohq_email_ctaTxt;
+     echo '</p> <p style="display: none;" id="ohq_email_hasCoupon">';
+    echo $ohq_email_hasCoupon[0];
+     echo '</p> <p style="display: none;" id="ohq_email_couponTxt">';
+    echo $ohq_email_couponTxt;
+     echo '</p> <p style="display: none;" id="ohq_email_buttonTxt">';
+    echo $ohq_email_buttonTxt;
+     echo '</p> <p style="display: none;" id="ohq_email_buttonUrl">';
+    echo $ohq_email_buttonUrl;
+     echo '</p> <p style="display: none;" id="ohq_email_websiteUrl">';
+    echo $ohq_email_websiteUrl;
+     echo '</p> <p style="display: none;" id="ohq_email_fbUrl">';
+    echo $ohq_email_fbUrl;
+     echo '</p> <p style="display: none;" id="ohq_email_twitterUrl">';
+    echo $ohq_email_twitterUrl;
+     echo '</p> <p style="display: none;" id="ohq_email_logoSrc">';
+    echo $ohq_email_logoSrc;
     echo '
       </p>
       <!-- <button ng-click="stage.updateDisplay()" class="btn-ohq-modal" ng-class="stage.modalBtnOpen" id="0_btn_start_quiz">Start Quiz</button> -->
@@ -134,7 +168,8 @@ class AGX_OHQ_Plugin {
         add_settings_section( 'agx_font_size',    '<hr><span style="color: #0073aa; font-size: 1.25rem;">Font-sizing</span>',           array( $this, 'section_callback'), 'agx-hearing-test' );
         add_settings_section( 'agx_user_action',  '<hr><span style="color: #0073aa; font-size: 1.25rem;">Include Contact Form</span>',  array( $this, 'section_callback'), 'agx-hearing-test' );
         add_settings_section( 'ninja_shortcode',  '<hr><span style="color: #0073aa; font-size: 1.25rem;">Link your Ninja Form</span>',  array( $this, 'section_callback'), 'agx-hearing-test' );
-        add_settings_section( 'cta_url_section',  '<hr><span style="color: #0073aa; font-size: 1.25rem;">Call To Action</span>',        array( $this, 'section_callback'), 'agx-hearing-test' ); 
+        add_settings_section( 'cta_url_section',  '<hr><span style="color: #0073aa; font-size: 1.25rem;">Call To Action</span>',        array( $this, 'section_callback'), 'agx-hearing-test' );
+        add_settings_section( 'results_email_section',  '<hr><span style="color: #0073aa; font-size: 1.25rem;">Results Email Section</span>',        array( $this, 'section_callback'), 'agx-hearing-test' );
     }
 
     public function section_callback( $arguments ){
@@ -154,6 +189,10 @@ class AGX_OHQ_Plugin {
 
             case 'cta_url_section':
                 echo '<p style="font-size: .85rem; margin-top: -0.75rem;">Set the text you wish to appear on the results page button and the URL you wish it to take the user to.</p>';
+                break;
+                
+            case 'results_email_section':
+                echo '<p style="font-size: .85rem; margin-top: -0.75rem;">Use this section to specify assorted settings for the results email (if "add \'Send Results\' form?" is unchecked).</p>';
                 break;
         }
     }
@@ -198,7 +237,84 @@ class AGX_OHQ_Plugin {
                 'placeholder' => 'URL here...',
                 'helper' => 'https://www...ect',
                 'supplimental' => 'I am underneath!',
-            )  
+            ),
+            array(
+                'uid' => 'email_ctaTxt',
+                'label' => 'Email call to action text:',
+                'section' => 'results_email_section',
+                'type' => 'textarea',
+            ),
+            array(
+                'uid' => 'email_hasCoupon',
+                'label' => 'Check to include a coupon below the CTA.',
+                'section' => 'results_email_section',
+                'type' => 'checkbox',
+                'options' => array(
+                    'agx_includeCoupon_Yes' => 'Include Coupon'
+                ),
+                'default' => array()
+            ),
+            array(
+                'uid' => 'email_couponTxt',
+                'label' => 'Email coupon text (if included):',
+                'section' => 'results_email_section',
+                'type' => 'textarea',
+            ),
+            array(
+                'uid' => 'email_buttonTxt',
+                'label' => 'Main button text (below CTA and Coupon):',
+                'section' => 'results_email_section',
+                'type' => 'text',
+                'placeholder' => 'Some Button Txt...',
+                'helper' => 'For example: Contact us today',
+                'supplimental' => 'I am underneath!',
+            ),
+            array(
+                'uid' => 'email_buttonUrl',
+                'label' => 'Main button url:',
+                'section' => 'results_email_section',
+                'type' => 'text',
+                'placeholder' => 'https://www...',
+                'helper' => 'Where should the button take them?',
+                'supplimental' => 'I am underneath!',
+            ),
+            array(
+                'uid' => 'email_websiteUrl',
+                'label' => 'Website URL (icon under button)',
+                'section' => 'results_email_section',
+                'type' => 'text',
+                'placeholder' => 'https://www...',
+                'helper' => '!!! Leave blank if not using !!!',
+                'supplimental' => 'I am underneath!',
+            ),
+            array(
+                'uid' => 'email_fbUrl',
+                'label' => 'Facebook URL (icon under button)',
+                'section' => 'results_email_section',
+                'type' => 'text',
+                'placeholder' => 'https://www...',
+                'helper' => '!!! Leave blank if not using !!!',
+                'supplimental' => 'I am underneath!',
+            ),
+            array(
+                'uid' => 'email_twitterUrl',
+                'label' => 'Twitter URL (icon under button)',
+                'section' => 'results_email_section',
+                'type' => 'text',
+                'placeholder' => 'https://www...',
+                'helper' => '!!! Leave blank if not using !!!',
+                'supplimental' => 'I am underneath!',
+            ),
+            array(
+                'uid' => 'email_logoSrc',
+                'label' => 'Member Logo Source (URL)',
+                'section' => 'results_email_section',
+                'type' => 'text',
+                'placeholder' => 'https://www...',
+                'helper' => 'File pathway for member logo image (200px wide)',
+                'supplimental' => 'I am underneath!',
+            )
+            
         );
 
         foreach( $fields as $field ){
