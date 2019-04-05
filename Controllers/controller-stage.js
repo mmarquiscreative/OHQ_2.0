@@ -137,7 +137,7 @@ angular.module('formApp').controller('stageController', ['$scope', '$state', 're
         $state.go('stage.intro');
     };
 
-    /* stage.loadForm = function(){
+   stage.loadForm = function(){
 
 	console.log('running test form');
 
@@ -156,6 +156,6 @@ angular.module('formApp').controller('stageController', ['$scope', '$state', 're
 
 
 		console.log(resultsMessage.value);
-	} */
+	}
 
 }])

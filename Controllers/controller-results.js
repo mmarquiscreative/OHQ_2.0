@@ -175,17 +175,19 @@ angular.module('formApp').controller('resultsController', ['$scope', 'resultsObj
     function genResultsEmailHtml() {
         var resultsEmail = resultsObj.resultsEmail;
 
+        
+        console.log(results);
         // update quiz percent and array
         resultsEmail.quizPercent = results.quizScore.percentScore;
         resultsEmail.quizMissed = results.wrongAns.quizAns;
 
         // update tone percent and array
-        resultsEmail.freqPercent = results.quizScore.percentScore;
+        resultsEmail.freqPercent = results.toneScore.percentScore;
         resultsEmail.freqMissed = results.wrongAns.toneAns;
 
 
         // update speech percent and array
-        resultsEmail.speechPercent = results.quizScore.percentScore;
+        resultsEmail.speechPercent = results.speechScore.percentScore;
         resultsEmail.speechMissed = results.wrongAns.speechAnsClean;
 
         console.log(resultsEmail);
