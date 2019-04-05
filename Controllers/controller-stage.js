@@ -140,9 +140,9 @@ angular.module('formApp').controller('stageController', ['$scope', '$state', 're
    stage.loadForm = function(){
 
 	console.log('running test form');
-/*
-	var resultsMessage = document.querySelector(".nf-quiz-message");
-	var quizResults = document.querySelector(".nf-hearing-results");
+
+	document.querySelector("#nf-field-5").value = 'test';
+	/* var quizResults = document.querySelector(".nf-hearing-results");
 	var toneResults = document.querySelector(".nf-tone-results");
 	var speechResults = document.querySelector(".ninja-forms-field.nf-speech-results.nf-element");
 		resultsMessage.onchange = function(){
