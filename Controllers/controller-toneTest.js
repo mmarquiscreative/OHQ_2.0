@@ -45,7 +45,7 @@ tone.startTest = false;
     // an reference object for the current audio filepath / updating it
     tone.curToneObj = {
         freq: '2000',
-        srcPath: '/wp-content/plugins/agx-hearing-test/sounds/2000.mp3'
+        srcPath: '/wp-content/plugins/OHQ_2.0/sounds/2000.mp3'
     }
 
     // starts audio if test has not already been completed
@@ -77,7 +77,7 @@ tone.startTest = false;
 
         if(tone.curTone < tone.frequencies.length){
             tone.curClass[tone.curTone] = 'active-freq';
-            var newSrc = ('/wp-content/plugins/agx-hearing-test/sounds/' + tone.frequencies[tone.curTone] + '.mp3');
+            var newSrc = ('/wp-content/plugins/OHQ_2.0/sounds/' + tone.frequencies[tone.curTone] + '.mp3');
             tone.curToneObj.freq = tone.frequencies[tone.curTone];
 
             tone.curToneObj.srcPath = newSrc;

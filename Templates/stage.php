@@ -11,7 +11,7 @@
                 <div id="status-buttons" ng-class="stage.testBool('intro') || stage.testBool('exit') ? 'hidden' : 'text-center nav'">
                     <button id="btn-restart" ng-click="stage.restart()">Restart Quiz</button>
 					
-                    <img class="agx-hearing-logo logo-stage" src="/wp-content/plugins/agx-hearing-test/img/AGX-Hearing-Color.png" />
+                    <img class="agx-hearing-logo logo-stage" src="/wp-content/plugins/OHQ_2.0/img/AGX-Hearing-Color.png" />
 
                     <div id="stepNavBar">
                         <div ng-class="stage.testBool('quiz') ? 'stepNavItem active' : 'stepNavItem'">Listening Situations</div>
