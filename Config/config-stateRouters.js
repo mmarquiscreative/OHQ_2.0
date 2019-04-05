@@ -6,7 +6,7 @@ angular.module('formApp').config(['$stateProvider', '$urlRouterProvider', functi
 	// route on innit page load
     .state('pre-stage', {
         url: '',
-        templateUrl: '/wp-content/plugins/OHQ_2.0/Templates/stage.php',
+        templateUrl: '/wp-content/plugins/agx-hearing-test/Templates/stage.php',
         controller: 'stageController',
         data: {
             testClass: 'stepNavItem active'
@@ -16,7 +16,7 @@ angular.module('formApp').config(['$stateProvider', '$urlRouterProvider', functi
     // route to show our basic form
     .state('stage', {
         url: '/stage',
-        templateUrl: '/wp-content/plugins/OHQ_2.0/Templates/stage.php',
+        templateUrl: '/wp-content/plugins/agx-hearing-test/Templates/stage.php',
         controller: 'stageController',
         data: {
             testClass: 'stepNavItem active'
@@ -29,14 +29,14 @@ angular.module('formApp').config(['$stateProvider', '$urlRouterProvider', functi
 
     .state('stage.intro', {
         url: '/intro',
-        templateUrl: '/wp-content/plugins/OHQ_2.0/Templates/stage-intro.php'
+        templateUrl: '/wp-content/plugins/agx-hearing-test/Templates/stage-intro.php'
     })
 
     // url will be /stage/quiz
 
     .state('stage.quiz', {
         url: '/quiz',
-        templateUrl: '/wp-content/plugins/OHQ_2.0/Templates/stage-quiz.php',
+        templateUrl: '/wp-content/plugins/agx-hearing-test/Templates/stage-quiz.php',
         controller: 'quizController'
     })
 
@@ -44,7 +44,7 @@ angular.module('formApp').config(['$stateProvider', '$urlRouterProvider', functi
 
     .state('stage.volume', {
         url: '/volume',
-        templateUrl: '/wp-content/plugins/OHQ_2.0/Templates/stage-volume.php',
+        templateUrl: '/wp-content/plugins/agx-hearing-test/Templates/stage-volume.php',
         controller: 'volumeController'
     })
 
@@ -52,7 +52,7 @@ angular.module('formApp').config(['$stateProvider', '$urlRouterProvider', functi
 
     .state('stage.toneTest', {
         url: '/toneTest',
-        templateUrl: '/wp-content/plugins/OHQ_2.0/Templates/stage-toneTest.php',
+        templateUrl: '/wp-content/plugins/agx-hearing-test/Templates/stage-toneTest.php',
         controller: 'toneTestController'
     })
 
@@ -60,7 +60,7 @@ angular.module('formApp').config(['$stateProvider', '$urlRouterProvider', functi
 
     .state('stage.speechTest', {
         url: '/speechTest',
-        templateUrl: '/wp-content/plugins/OHQ_2.0/Templates/stage-speechTest.php',
+        templateUrl: '/wp-content/plugins/agx-hearing-test/Templates/stage-speechTest.php',
         controller: 'SpeechTest'
     })
 
@@ -68,7 +68,7 @@ angular.module('formApp').config(['$stateProvider', '$urlRouterProvider', functi
 
     .state('stage.results', {
         url: '/results',
-        templateUrl: '/wp-content/plugins/OHQ_2.0/Templates/stage-results.php',
+        templateUrl: '/wp-content/plugins/agx-hearing-test/Templates/stage-results.php',
         controller: 'resultsController'
     })
 
@@ -76,7 +76,7 @@ angular.module('formApp').config(['$stateProvider', '$urlRouterProvider', functi
 
     .state('stage.exit', {
       url: '/exit',
-      templateUrl: '/wp-content/plugins/OHQ_2.0/Templates/stage-exit.php',
+      templateUrl: '/wp-content/plugins/agx-hearing-test/Templates/stage-exit.php',
       controller: 'exitController'
     })
 

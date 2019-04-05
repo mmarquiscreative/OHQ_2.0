@@ -1,39 +1,36 @@
 angular.module('formApp').controller('toneTestController', ['$scope', 'resultsObj', '$state', function ($scope, resultsObj, $state) {
     var tone = this;
 
-    tone.startTest = false;
-
-    // returns a boolean from resultsObj.toneCompleted
-    tone.testCompleted = resultsObj.toneCompleted;
-
-    console.log("Start Test: " + tone.startTest);
-    console.log("Test Completed: " + tone.testCompleted);
-
-    resultsObj.OHQ_audio.toneTest_2000.preload = 'auto';
-    resultsObj.OHQ_audio.toneTest_4000.preload = 'auto';
-    resultsObj.OHQ_audio.toneTest_6000.preload = 'auto';
-    resultsObj.OHQ_audio.toneTest_8000.preload = 'auto';
-    resultsObj.OHQ_audio.toneTest_10000.preload = 'auto';
+tone.startTest = false;
     
-resultsObj.OHQ_audio.toneTest_2000.load();
-    resultsObj.OHQ_audio.toneTest_4000.load();
-    resultsObj.OHQ_audio.toneTest_6000.load();
-    resultsObj.OHQ_audio.toneTest_8000.load();
-    resultsObj.OHQ_audio.toneTest_10000.load();
+    // returns a boolean from resultsObj.toneCompleted
+    tone.testCompleted = resultsObj.testComplete('tone');
+
+    // assigns audio html to a variable
+    tone.toneAudio = document.querySelector('#toneAudio');
+
+    // set volume of audio
+    tone.toneAudio.volume = resultsObj.globalVolume;
 
     // sets loop
-    resultsObj.OHQ_audio.toneTest_2000.loop = true;
+    tone.toneAudio.loop = true;
 
     // establishes autoplay variable
-    resultsObj.OHQ_audio.toneTest_2000.autoplay = false;
-
-    resultsObj.OHQ_audio.toneTest_2000.pause();
-
+    tone.toneAudio.autoplay = false;
+    
+    tone.toneAudio.pause();
+    
     // disable y/n buttons if true
     tone.disabledBool = false;
 
-    
-    
+    // hide y/n buttons if true
+    tone.buttonHide_YN = false;
+
+    // hide next button if true
+    tone.buttonHide_Next = true;
+
+    // array of frequency strings that match audio file names
+    tone.frequencies = new Array('2000', '4000', '6000', '8000', '10000');
 
     // The html block with active-freq is styled as the active tone.
     // The active-freq will be pushed down the array,
@@ -43,179 +40,28 @@ resultsObj.OHQ_audio.toneTest_2000.load();
     tone.curClass = new Array('active-freq', '', '', '', '');
 
     // a counter for which tone we're on
-    tone.curTone = 2;
+    tone.curTone = 0;
 
     // an reference object for the current audio filepath / updating it
     tone.curToneObj = {
         freq: '2000',
-        srcPath: '/wp-content/plugins/OHQ_2.0/sounds/2000.mp3'
+        srcPath: '/wp-content/plugins/agx-hearing-test/sounds/2000.mp3'
     }
 
     // starts audio if test has not already been completed
     if(!tone.testCompleted && tone.startTest){
-        resultsObj.OHQ_audio.toneTest_2000.autoplay = true;
+        tone.toneAudio.autoplay = true;
     }
 
     // function that runs when either y/n button is pushed
     // someBool is true if 'yes' or false if 'No'
-
-
-    //////////////////////////////////////
-    //////////////////////////////////////
-    // START: Non-bracket notation version 
-
-
     tone.nextTone = function(someBool){
-        var lastFreq = (tone.curTone * 1000);
-        var curFreq = ((tone.curTone + 2) * 1000);
-        var lastClass = (tone.curTone/2 - 1);
-        var curClass = (tone.curTone/2);
-
-        // 1. play audio
-        if(tone.curTone < 10){
-            audioPlayer(lastFreq, 'stop');
-
-            console.log('play ' + curFreq);
-            audioPlayer(curFreq, 'play');
-        } else if (tone.curTone === 10){
-            console.log('stop ' + curFreq);
-            audioPlayer(lastFreq, 'stop');
-        } else {
-            console.log('curFreq greater than 10000');
-        }
-
-        // 2. update style
-        if(tone.curTone < 10){
-            tone.curClass[lastClass] = '';
-            tone.curClass[curClass] = 'active-freq';
-        }
-
-        // 3. push answer
-        // if false / answered 'no' / couldn't hear tone
-        if(!someBool){
-
-            // add one to score for this section
-            resultsObj.toneScore++
-
-            // push which frequency they struggled with to resultsObj
-            resultsObj.toneAns.push(lastFreq);
-        };
-        // 4. Increase curTone by 2
-        tone.curTone += 2;
-
-        // 5. Finish
-        if(tone.curTone > 10){
-            
-            tone.disabledBool = true;
-        
-        // resultsObj.OHQ_audio.toneTest_2000.autoplay = false;
-        // tone.buttonHide_YN = true;
-    
-        resultsObj.toneCompleted = true;
-        console.log(resultsObj.toneCompleted);
-                tone.startTest = false;
-        console.log(resultsObj.toneAns);
-
-        $state.go('^.speechTest');
-            
-        }
-
-        // 6. Move to next stage
-        console.log('nextStep pressed');
-        
-    }
-    function audioPlayer(whichAudio, playStop){
-
-        if(playStop === 'play'){
-
-            switch(whichAudio){
-                case 2000:
-                    resultsObj.OHQ_audio.toneTest_2000.play();
-                    resultsObj.OHQ_audio.toneTest_2000.loop = true;
-                    break;
-                case 4000:
-                    resultsObj.OHQ_audio.toneTest_4000.play();
-                    resultsObj.OHQ_audio.toneTest_4000.loop = true;
-                    break;
-                case 6000:
-                    resultsObj.OHQ_audio.toneTest_6000.play();
-                    resultsObj.OHQ_audio.toneTest_6000.loop = true;
-                    break;
-                case 8000:
-                    resultsObj.OHQ_audio.toneTest_8000.play();
-                    resultsObj.OHQ_audio.toneTest_8000.loop = true;
-                    break;
-                case 10000:
-                    resultsObj.OHQ_audio.toneTest_10000.play();
-                    resultsObj.OHQ_audio.toneTest_10000.loop = true;
-                    break;
-                default:
-                    console.log('audioPlayer PLAY switch didnt work. whichAudio was: ' + whichAudio);
-            };
-
-        } else if (playStop === 'stop'){
-
-            switch(whichAudio){
-                case 2000:
-                    resultsObj.OHQ_audio.toneTest_2000.pause();
-                    resultsObj.OHQ_audio.toneTest_2000.loop = false;
-                    break;
-                case 4000:
-                    resultsObj.OHQ_audio.toneTest_4000.pause();
-                    resultsObj.OHQ_audio.toneTest_4000.loop = false;
-                    break;
-                case 6000:
-                    resultsObj.OHQ_audio.toneTest_6000.pause();
-                    resultsObj.OHQ_audio.toneTest_6000.loop = false;
-                    break;
-                case 8000:
-                    resultsObj.OHQ_audio.toneTest_8000.pause();
-                    resultsObj.OHQ_audio.toneTest_8000.loop = false;
-                    break;
-                case 10000:
-                    resultsObj.OHQ_audio.toneTest_10000.pause();
-                    resultsObj.OHQ_audio.toneTest_10000.loop = false;
-                    break;
-                default:
-                    console.log('audioPlayer STOP switch didnt work. whichAudio was: ' + whichAudio);
-            };
-
-        }
-
-    }
-
-
-
-
-
-
-
-
-
-
-    // END: Non-bracket notation version
-    //////////////////////////////////////
-    //////////////////////////////////////
-
-
-
-
-
-
-
-
-
-
-
-
-    /*tone.nextTone = function(someBool){
 
         tone.startTest = true;
-
-        var lastTone = tone.curTone - 1;
-
+        tone.toneAudio.autoplay = true;
+        
         // removes 'active-freq' class from current html block
-        tone.curClass[lastTone] = '';
+        tone.curClass[tone.curTone] = '';
 
         // if false / answered 'no' / couldn't hear tone
         if(!someBool){
@@ -224,63 +70,52 @@ resultsObj.OHQ_audio.toneTest_2000.load();
             resultsObj.toneScore++
 
             // push which frequency they struggled with to resultsObj
-            resultsObj.toneAns.push(tone.frequencies[lastTone]);
-        };
-
-        if(tone.curTone > 0) {
-            // pauses the current audio tone playing
-            resultsObj.OHQ_audio['toneTest_' + (tone.curTone * 2) + '000'].pause();
+            resultsObj.toneAns.push(tone.frequencies[tone.curTone]);
         };
 
         tone.curTone++;
-        lastTone++;
 
-        if(tone.curTone <= tone.frequencies.length){
+        if(tone.curTone < tone.frequencies.length){
+            tone.curClass[tone.curTone] = 'active-freq';
+            var newSrc = ('/wp-content/plugins/agx-hearing-test/sounds/' + tone.frequencies[tone.curTone] + '.mp3');
+            tone.curToneObj.freq = tone.frequencies[tone.curTone];
 
-            tone.curClass[lastTone] = 'active-freq';
+            tone.curToneObj.srcPath = newSrc;
 
-            resultsObj.OHQ_audio['toneTest_' + (tone.curTone * 2) + '000'].play();
-            resultsObj.OHQ_audio['toneTest_' + (tone.curTone * 2) + '000'].loop = true;
-
-            console.log((tone.curTone * 2));
-            console.log(resultsObj.OHQ_audio['toneTest_' + (tone.curTone * 2) + '000']);
-
-        } else if (tone.curTone > tone.frequencies.length){
+        } else if (tone.curTone >= tone.frequencies.length){
             tone.disabledBool = true;
-            resultsObj.OHQ_audio.toneTest_2000.autoplay = false;
+            tone.toneAudio.autoplay = false;
             tone.buttonHide_YN = true;
             tone.buttonHide_Next = false;
             resultsObj.toneCompleted = true;
-            console.log(resultsObj.toneCompleted);
             $state.go('^.speechTest')
             console.log(resultsObj.toneAns);
-            tone.startTest = false;
 
         } else {
             console.log(("something went wrong with tone.nextTone. Here is someBool: " + someBool + "\n and here is tone.curTone: " + tone.curTone));
         }
-    } */
+    }
 
     tone.resetStage = function(){
+        tone.toneAudio.play();
 
-        tone.startTest = false;
-
+                tone.startTest = false;
+        
         setTimeout(function(){
             $scope.$apply(function(){
-                resultsObj.OHQ_audio.toneTest_2000.autoplay = true;
+                tone.toneAudio.autoplay = true;
             });
         }, 1);
         resultsObj.toneScore = 0;
         resultsObj.toneAns = [];
         resultsObj.toneCompleted = false;
-
-        tone.testCompleted = false;
-        tone.startTest = false;
+        tone.testCompleted = resultsObj.testComplete('tone');
     };
-
-    tone.startToneTest = function(){
+    
+     tone.startToneTest = function(){
         tone.startTest = true;
-        resultsObj.OHQ_audio.toneTest_2000.play();
+        tone.toneAudio.play();
+        
     }
 
 
