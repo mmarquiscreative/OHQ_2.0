@@ -28,7 +28,7 @@ function agx_hearing_test($content) {
     $font_baseline = get_option('agx_font_percent');
     $agx_useNinjaForm = get_option('agx_useNinjaForm');
 
-    if($agx_useNinjaForm === 'agx_useNinjaForm_Yes'){
+    if($agx_useNinjaForm[0] === 'agx_useNinjaForm_Yes'){
         $agx_useNinja_string = $agx_useNinja_yes;
     } else {
         $agx_useNinja_string = $agx_useNinja_no;

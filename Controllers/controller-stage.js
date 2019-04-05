@@ -140,7 +140,7 @@ angular.module('formApp').controller('stageController', ['$scope', '$state', 're
    stage.loadForm = function(){
 
 	console.log('running test form');
-
+/*
 	var resultsMessage = document.querySelector(".nf-quiz-message");
 	var quizResults = document.querySelector(".nf-hearing-results");
 	var toneResults = document.querySelector(".nf-tone-results");
@@ -155,7 +155,7 @@ angular.module('formApp').controller('stageController', ['$scope', '$state', 're
 
 
 
-		console.log(resultsMessage.value);
+		console.log(resultsMessage.value); */
 	}
 
 }])
