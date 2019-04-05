@@ -1,214 +1,63 @@
 // CONTROLLERS
-angular.module('formApp').controller('stageController', ['$scope', '$state', 'resultsObj', '$location', function ($scope,  $state, resultsObj, $location) {
+angular.module('formApp').controller('stageController', ['$scope', '$state', 'resultsObj', '$location', function ($scope, $state, resultsObj, $location) {
     var stage, headerEl, headerStyles, themePageStyles, starterZIndex;
     stage = this;
-
-    /* var OHQ_HTML = document.querySelector('#agx-ohq').innerHTML;
-  document.querySelector('#top-of-page').outerHTML = OHQ_HTML + document.querySelector('#top-of-page').outerHTML;
-  */ 
-
-
-
-
-
-
-
-    /* START: Audio Test Section 
-
-    //// CONTROL
-    var controlPlayCount = 0;
-
-    stage.controlPlayNext = function(){
-
-        if(controlPlayCount <= 3){
-
-            controlPlayCount++;
-
-            if(controlPlayCount > 1){
-                resultsObj.OHQ_audio['toneTest_' + ((controlPlayCount - 1) * 2) + '000'].pause();
-                resultsObj.OHQ_audio['toneTest_' + ((controlPlayCount - 1) * 2) + '000'].loop = false;
-            };
-
-            resultsObj.OHQ_audio['toneTest_' + (controlPlayCount * 2) + '000'].play();
-            resultsObj.OHQ_audio['toneTest_' + (controlPlayCount * 2) + '000'].loop = true;
-        } else {
-            resultsObj.OHQ_audio['toneTest_' + (controlPlayCount * 2) + '000'].pause();
-            resultsObj.OHQ_audio['toneTest_' + (controlPlayCount * 2) + '000'].loop = false;
-        };
-    };
-
-
-    //// OBJECT PROPERTY TWEAK
-var objectPropPlayCount = 0;
-var objectPropWords = [ 'Puff', 'Shout', 'Take'];
-
-    stage.objectPropPlayNext = function(){
-
-        if(objectPropPlayCount <= 2){
-
-
-            if(objectPropPlayCount > 0){
-                var tempNum = (objectPropPlayCount - 1)
-                resultsObj.OHQ_audio['speechTest_Word_' + (objectPropWords[tempNum])].pause();
-                resultsObj.OHQ_audio['speechTest_Word_' + (objectPropWords[tempNum])].loop = false;
-            };
-
-            resultsObj.OHQ_audio['speechTest_Word_' + (objectPropWords[objectPropPlayCount])].play();
-            resultsObj.OHQ_audio['speechTest_Word_' + (objectPropWords[objectPropPlayCount])].loop = true;
-
-        } else {
-           var tempNum = (objectPropPlayCount - 1)
-                resultsObj.OHQ_audio['speechTest_Word_' + (objectPropWords[tempNum])].pause();
-                resultsObj.OHQ_audio['speechTest_Word_' + (objectPropWords[tempNum])].loop = false;
-        };
-                    objectPropPlayCount++;
-
-    };
-
-
-    //// PRELOAD: AUTO JS
-    
-var preloadPlayCount = 0;
-var preloadWords = [ 'Bean', 'Chalk', 'Goose'];
-    resultsObj.OHQ_audio.speechTest_Word_Bean.preload = 'auto';
-    resultsObj.OHQ_audio.speechTest_Word_Chalk.preload = 'auto';
-    resultsObj.OHQ_audio.speechTest_Word_Goose.preload = 'auto';
-    
-
-    stage.preloadPlayNext = function(){
-
-        if(preloadPlayCount <= 2){
-
-
-            if(preloadPlayCount > 0){
-                var tempNum = (preloadPlayCount - 1)
-                resultsObj.OHQ_audio['speechTest_Word_' + (preloadWords[tempNum])].pause();
-                resultsObj.OHQ_audio['speechTest_Word_' + (preloadWords[tempNum])].loop = false;
-            };
-
-            resultsObj.OHQ_audio['speechTest_Word_' + (preloadWords[preloadPlayCount])].play();
-            resultsObj.OHQ_audio['speechTest_Word_' + (preloadWords[preloadPlayCount])].loop = true;
-
-        } else {
-           var tempNum = (preloadPlayCount - 1)
-                resultsObj.OHQ_audio['speechTest_Word_' + (preloadWords[tempNum])].pause();
-                resultsObj.OHQ_audio['speechTest_Word_' + (preloadWords[tempNum])].loop = false;
-        };
-                    preloadPlayCount++;
-
-    };
-
-
-    //// SRC CHANGE
-    stage.curToneSrc = '/wp-content/plugins/OHQ_2.0/sounds/SpeechTest_OHQ_Noise_Lvl1.mp3';
-    var srcCurTone = 0;
-    var toneAudio = new Audio('/wp-content/plugins/OHQ_2.0/sounds/ToneTest_OHQ_2000_Hz.mp3');
-    
-   
-    
-    
-    stage.srcPlayNext = function(){
-        
-        if(srcCurTone < 10){
-                    srcCurTone += 2;
-
-        toneAudio.src = '/wp-content/plugins/OHQ_2.0/sounds/ToneTest_OHQ_' + srcCurTone + '000_Hz.mp3';
-        toneAudio.play();
-        } else {
-            toneAudio.pause();
-        }
-        
-        
-    }
-
-    //// DOUBLE STREAMING
-
-var notPlaying = true;
-
-stage.doublePlayNext = function(){
-    
- 
-    
-    
-    
-    if(notPlaying){
-        document.querySelector('#doubleBGNoise').play();
-        document.querySelector('#doubleBGNoise').loop = true;
-        
-        document.querySelector('#doubleWord').play();
-        document.querySelector('#doubleWord').loop = true;
-        notPlaying = false;
-    } else {
-      
-        
-        doubleBGNoise.pause();
-        document.querySelector('#doubleBGNoise').loop = false;
-        
-        doubleWord.pause();
-        document.querySelector('#doubleWord').loop = false;
-        
-        notPlaying = true;
-    }
-    
-}
-     END: Audio Test Section */
-
-
-    /* START: Modal Functionality */
+/* START: Modal Functionality */
     stage.cta_text = document.querySelector('#cta_text').textContent;
     stage.cta_url = document.querySelector('#cta_url').textContent;
-      resultsObj.resultsEmail.ctaTxt = stage.email_ctaTxt;
     
-    
+    // resultsObj.resultsEmail.ctaTxt = stage.email_ctaTxt;
+
+
     stage.ohq_email_ctaTxt = document.querySelector('#ohq_email_ctaTxt').textContent;
-      resultsObj.resultsEmail.ctaTxt = stage.ohq_email_ctaTxt;
-    
-    
+    resultsObj.resultsEmail.ctaTxt = stage.ohq_email_ctaTxt;
+
+
     stage.ohq_email_hasCoupon = document.querySelector('#ohq_email_hasCoupon').textContent;
-    
-    if(stage.ohq_email_hasCoupon === "agx_includeCoupon_Yes"){
+
+    if (stage.ohq_email_hasCoupon === "agx_includeCoupon_Yes") {
         resultsObj.resultsEmail.hasCoupon = true;
     } else {
-                resultsObj.resultsEmail.hasCoupon = false;
+        resultsObj.resultsEmail.hasCoupon = false;
 
     };
-      
-    
-    
+
+
+
     stage.ohq_email_couponTxt = document.querySelector('#ohq_email_couponTxt').textContent;
-      resultsObj.resultsEmail.couponTxt = stage.ohq_email_couponTxt;
-    
-    
+    resultsObj.resultsEmail.couponTxt = stage.ohq_email_couponTxt;
+
+
     stage.ohq_email_buttonTxt = document.querySelector('#ohq_email_buttonTxt').textContent;
-      resultsObj.resultsEmail.buttonTxt = stage.ohq_email_buttonTxt;
-    
-    
+    resultsObj.resultsEmail.buttonTxt = stage.ohq_email_buttonTxt;
+
+
     stage.ohq_email_buttonUrl = document.querySelector('#ohq_email_buttonUrl').textContent;
-      resultsObj.resultsEmail.buttonUrl = stage.ohq_email_buttonUrl;
-    
-    
+    resultsObj.resultsEmail.buttonUrl = stage.ohq_email_buttonUrl;
+
+
     stage.ohq_email_websiteUrl = document.querySelector('#ohq_email_websiteUrl').textContent;
-      resultsObj.resultsEmail.websiteUrl = stage.ohq_email_websiteUrl;
-    
-    
+    resultsObj.resultsEmail.websiteUrl = stage.ohq_email_websiteUrl;
+
+
     stage.ohq_email_fbUrl = document.querySelector('#ohq_email_fbUrl').textContent;
-      resultsObj.resultsEmail.fbUrl = stage.ohq_email_fbUrl;
-    
-    
+    resultsObj.resultsEmail.fbUrl = stage.ohq_email_fbUrl;
+
+
     stage.ohq_email_twitterUrl = document.querySelector('#ohq_email_twitterUrl').textContent;
-      resultsObj.resultsEmail.twitterUrl = stage.ohq_email_twitterUrl;
-    
-    
+    resultsObj.resultsEmail.twitterUrl = stage.ohq_email_twitterUrl;
+
+
     stage.ohq_email_logoSrc = document.querySelector('#ohq_email_logoSrc').textContent;
-      resultsObj.resultsEmail.logoSrc = stage.ohq_email_logoSrc;
-    
-    
+    resultsObj.resultsEmail.logoSrc = stage.ohq_email_logoSrc;
+
+
     resultsObj.cta_text = stage.cta_text;
     resultsObj.cta_url = stage.cta_url;
 
-    console.log(resultsObj.resultsEmail);
-  
-    
+ 
+
+
     // Modal Classes
     stage.modalClass = 'ohq-modal';
     stage.modalBtnOpen = 'btn-open';
@@ -219,44 +68,45 @@ stage.doublePlayNext = function(){
 
 
 
-    console.log(document.querySelector('#OHQ_test'));    
+    console.log(document.querySelector('#OHQ_test'));
     document.querySelector('#OHQ_test').addEventListener('click', openOHQ, false);
 
     function openOHQ() {
         document.querySelector('#ohq-container').style.display = 'block';
         document.querySelector('#ohq-overlay-parent').style.display = 'block';
         var test_iOS = is_iOS();
-        
-        
-        
-        if(test_iOS){
+
+
+
+        if (test_iOS) {
             console.log('is_iOS came back true: running pre-play actions');
             resultsObj.OHQ_audio.speechTest_Master_lvl1.play();
-    resultsObj.OHQ_audio.speechTest_Master_lvl1.pause();
+            resultsObj.OHQ_audio.speechTest_Master_lvl1.pause();
             resultsObj.OHQ_audio.speechTest_Master_lvl2.play();
-    resultsObj.OHQ_audio.speechTest_Master_lvl2.pause();
+            resultsObj.OHQ_audio.speechTest_Master_lvl2.pause();
             resultsObj.OHQ_audio.speechTest_Master_lvl3.play();
-    resultsObj.OHQ_audio.speechTest_Master_lvl3.pause();
-                     };
+            resultsObj.OHQ_audio.speechTest_Master_lvl3.pause();
+        };
         $state.go('stage.intro');
-        
+
         document.querySelector('body').style.overflow = 'hidden';
     }
-function is_iOS () {
-    /*
+
+    function is_iOS() {
+        /*
         Returns whether device agent is iOS Safari
     */
-    
-    console.log(navigator.userAgent);
-    
-    var ua = navigator.userAgent;
-    var iOS = !!ua.match(/iPad/i) || !!ua.match(/iPhone/i);
-    var webkitUa = !!ua.match(/WebKit/i);
 
-    return webkitUa && iOS && !ua.match(/CriOS/i);
-    
-    //return typeof webkit !== 'undefined' && iOS && webkit && !ua.match(/CriOS/i);
-};
+        console.log(navigator.userAgent);
+
+        var ua = navigator.userAgent;
+        var iOS = !!ua.match(/iPad/i) || !!ua.match(/iPhone/i);
+        var webkitUa = !!ua.match(/WebKit/i);
+
+        return webkitUa && iOS && !ua.match(/CriOS/i);
+
+        //return typeof webkit !== 'undefined' && iOS && webkit && !ua.match(/CriOS/i);
+    };
     ///////////////////////////////////////////////////////////////
     // ::AGXHearing.com::START AGX Hearing Floating Header Workaround 
     ///////////////////////////////////////////////////////////////
@@ -276,7 +126,7 @@ function is_iOS () {
 
 
     // Toggle between stage-up and button
-    stage.updateDisplay = function() {
+    stage.updateDisplay = function () {
         // var testClass, themePageZIndex, tempHeaderIndex;
 
         document.querySelector('#ohq-container').style.display = 'none';
@@ -331,10 +181,10 @@ function is_iOS () {
     /* END: Modal Functionality */
 
 
-    stage.testBool = function(stageName) {
+    stage.testBool = function (stageName) {
         var returnBool;
 
-        switch(stageName) {
+        switch (stageName) {
             case 'intro':
                 returnBool = $state.$current.includes['stage.intro'];
                 break;
@@ -364,7 +214,7 @@ function is_iOS () {
         return returnBool;
     }
 
-    stage.restart = function() {
+    stage.restart = function () {
         resultsObj.restartTest();
         $state.go('stage.intro');
     };

@@ -27,6 +27,69 @@ formApp.value('resultsObj', {
     testComplete: function(someString){
         return this[(someString + 'Completed')];
         },
+    resultsEmail: {
+        // ** WP Menu Items:
+        // email_ctaTxt
+        ctaTxt: "",
+
+        // email_hasCoupon (checkbox to include coupon)
+        hasCoupon: false,
+        
+        // email_couponTxt
+        couponTxt: "",
+
+        // email_buttonTxt
+        buttonTxt: "",
+
+        // email_buttonUrl
+        buttonUrl: "",
+
+        useWebsite: false,
+
+        // email_websiteUrl
+        websiteUrl: "",
+        websiteIconSrc: "IconPlaceholder.png",
+
+        useFb: false,
+
+        // email_fbUrl
+        fbUrl: "",
+        fbIconSrc: "",
+
+        useTwitter: false,
+
+        // email_twitterUrl
+        twitterUrl: "",
+        twitterIconSrc: "",
+
+        // email_logoSrc
+        logoSrc: "AwesomeAudiology_Reversed.png",
+
+        // ** Pre-filled by quiz
+        quizSectionName: "Listening Environments",
+        quizSectionColor: "#008aab",
+        quizSectionShade: "#00738f",
+
+        quizPercent: "XX",
+        quizMissed: ["canvas", "testing", "raddish", "quidditch", "goose"],
+        quizBullets: "",
+
+        freqSectionName: "Frequency Range",
+        freqSectionColor: "#666463",
+        freqSectionShade: "#3d3935",
+
+        freqPercent: "X",
+        freqMissed: ["2000hz", "10000hz", "6000hz"],
+        freqBullets: "",
+
+        speechSectionName: "Speech-In-Noise",
+        speechSectionColor: "#532d6d",
+        speechSectionShade: "#3d214f",
+
+        speechPercent: "XX",
+        speechMissed: ["moon", "chair", "bean"],
+        speechBullets: ""
+    },
     restartTest: function(){
         
         console.log('running restart test');

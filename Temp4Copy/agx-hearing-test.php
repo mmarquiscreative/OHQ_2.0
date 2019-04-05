@@ -41,22 +41,22 @@ function agx_hearing_test($content) {
     } else {
         $agx_useNinja_string = $agx_useNinja_no;
     };
-    
-        $ohq_email_ctaTxt = get_option('email_ctaTxt');
-    
+
+    $ohq_email_ctaTxt = get_option('email_ctaTxt');
+
     // checkbox
-        $ohq_email_hasCoupon = get_option('email_hasCoupon');
-        $ohq_email_couponTxt = get_option('email_couponTxt');
-    
-        $ohq_email_buttonTxt = get_option('email_buttonTxt');
-        $ohq_email_buttonUrl = get_option('email_buttonUrl');
-    
+    $ohq_email_hasCoupon = get_option('email_hasCoupon');
+    $ohq_email_couponTxt = get_option('email_couponTxt');
+
+    $ohq_email_buttonTxt = get_option('email_buttonTxt');
+    $ohq_email_buttonUrl = get_option('email_buttonUrl');
+
     // Check length to determin if using (if .length > 0 useWebsite = true;)
-        $ohq_email_websiteUrl = get_option('email_websiteUrl');
-        $ohq_email_fbUrl = get_option('email_fbUrl');
-        $ohq_email_twitterUrl = get_option('email_twitterUrl');
-    
-        $ohq_email_logoSrc = get_option('email_logoSrc');
+    $ohq_email_websiteUrl = get_option('email_websiteUrl');
+    $ohq_email_fbUrl = get_option('email_fbUrl');
+    $ohq_email_twitterUrl = get_option('email_twitterUrl');
+
+    $ohq_email_logoSrc = get_option('email_logoSrc');
 
     echo '<div style="font-size: ';
     echo $font_baseline;
@@ -71,23 +71,23 @@ function agx_hearing_test($content) {
     echo $cta_text;
     echo '</p> <p style="display: none;" id="cta_url">';
     echo $cta_url;
-     echo '</p> <p style="display: none;" id="ohq_email_ctaTxt">';
+    echo '</p> <p style="display: none;" id="ohq_email_ctaTxt">';
     echo $ohq_email_ctaTxt;
-     echo '</p> <p style="display: none;" id="ohq_email_hasCoupon">';
+    echo '</p> <p style="display: none;" id="ohq_email_hasCoupon">';
     echo $ohq_email_hasCoupon[0];
-     echo '</p> <p style="display: none;" id="ohq_email_couponTxt">';
+    echo '</p> <p style="display: none;" id="ohq_email_couponTxt">';
     echo $ohq_email_couponTxt;
-     echo '</p> <p style="display: none;" id="ohq_email_buttonTxt">';
+    echo '</p> <p style="display: none;" id="ohq_email_buttonTxt">';
     echo $ohq_email_buttonTxt;
-     echo '</p> <p style="display: none;" id="ohq_email_buttonUrl">';
+    echo '</p> <p style="display: none;" id="ohq_email_buttonUrl">';
     echo $ohq_email_buttonUrl;
-     echo '</p> <p style="display: none;" id="ohq_email_websiteUrl">';
+    echo '</p> <p style="display: none;" id="ohq_email_websiteUrl">';
     echo $ohq_email_websiteUrl;
-     echo '</p> <p style="display: none;" id="ohq_email_fbUrl">';
+    echo '</p> <p style="display: none;" id="ohq_email_fbUrl">';
     echo $ohq_email_fbUrl;
-     echo '</p> <p style="display: none;" id="ohq_email_twitterUrl">';
+    echo '</p> <p style="display: none;" id="ohq_email_twitterUrl">';
     echo $ohq_email_twitterUrl;
-     echo '</p> <p style="display: none;" id="ohq_email_logoSrc">';
+    echo '</p> <p style="display: none;" id="ohq_email_logoSrc">';
     echo $ohq_email_logoSrc;
     echo '
       </p>
@@ -131,8 +131,11 @@ class AGX_OHQ_Plugin {
 
         // Hook into the admin menu
         add_action('admin_menu', array($this, 'create_plugin_settings_page'));
+
         add_action('admin_init', array($this, 'setup_sections'));
+
         add_action('admin_init', array($this, 'setup_fields')); 
+
     }
 
     public function create_plugin_settings_page(){
@@ -190,7 +193,7 @@ class AGX_OHQ_Plugin {
             case 'cta_url_section':
                 echo '<p style="font-size: .85rem; margin-top: -0.75rem;">Set the text you wish to appear on the results page button and the URL you wish it to take the user to.</p>';
                 break;
-                
+
             case 'results_email_section':
                 echo '<p style="font-size: .85rem; margin-top: -0.75rem;">Use this section to specify assorted settings for the results email (if "add \'Send Results\' form?" is unchecked).</p>';
                 break;
@@ -314,7 +317,7 @@ class AGX_OHQ_Plugin {
                 'helper' => 'File pathway for member logo image (200px wide)',
                 'supplimental' => 'I am underneath!',
             )
-            
+
         );
 
         foreach( $fields as $field ){

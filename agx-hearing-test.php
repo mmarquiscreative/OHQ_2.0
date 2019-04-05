@@ -14,63 +14,95 @@ require_once 'scripts.php';
 
 
 function agx_hearing_test($content) {
-$agx_useNinja_no = '<button ng-click="stage.updateDisplay()"	   ng-class="stage.testBool(\'exit\') ? \'hidden\' : \'btn-exit\'" id="x_btn_exit">X</button>
+    $agx_useNinja_no = '<button ng-click="stage.updateDisplay()"	   ng-class="stage.testBool(\'exit\') ? \'hidden\' : \'btn-exit\'" id="x_btn_exit">X</button>
 		 <!-- <button ui-sref="stage.exit" ng-click="stage.loadForm()"		   ng-class="stage.testBool(\'results\') ? \'btn-exit\' : \'hidden\'">X</button> -->';
-	
-	$agx_useNinja_yes = '<button ng-click="stage.updateDisplay()"	   ng-class="stage.testBool(\'results\') ? \'hidden\' : \'btn-exit\'" id="x_btn_exit">X</button>
+
+    $agx_useNinja_yes = '<button ng-click="stage.updateDisplay()"	   ng-class="stage.testBool(\'results\') ? \'hidden\' : \'btn-exit\'" id="x_btn_exit">X</button>
 		 <button ui-sref="stage.exit" ng-click="stage.loadForm()"		   ng-class="stage.testBool(\'results\') ? \'btn-exit\' : \'hidden\'">X</button>';
-	
-	$agx_useNinja_string = '';
-	
-	$ninjaNum = get_option('ninja_number');
-	$cta_text = get_option('cta_text');
-	$cta_url = get_option('cta_url');
-	$font_baseline = get_option('agx_font_percent');
-	$agx_useNinjaForm = get_option('agx_useNinjaForm');
-	
-	if($agx_useNinjaForm === 'agx_useNinjaForm_Yes'){
-		$agx_useNinja_string = $agx_useNinja_yes;
-	} else {
-		$agx_useNinja_string = $agx_useNinja_no;
-	};
-	
-	
-	
-		echo '<div style="font-size: ';
-	echo $font_baseline;
-	echo '% !important;"><p>TestingTesting</p>';
-		echo '<div id="agx-ohq"  ng-app="formApp">
+
+    $agx_useNinja_string = '';
+
+    $ninjaNum = get_option('ninja_number');
+    $cta_text = get_option('cta_text');
+    $cta_url = get_option('cta_url');
+    $font_baseline = get_option('agx_font_percent');
+    $agx_useNinjaForm = get_option('agx_useNinjaForm');
+
+    if($agx_useNinjaForm === 'agx_useNinjaForm_Yes'){
+        $agx_useNinja_string = $agx_useNinja_yes;
+    } else {
+        $agx_useNinja_string = $agx_useNinja_no;
+    };
+
+    $ohq_email_ctaTxt = get_option('email_ctaTxt');
+
+    // checkbox
+    $ohq_email_hasCoupon = get_option('email_hasCoupon');
+    $ohq_email_couponTxt = get_option('email_couponTxt');
+
+    $ohq_email_buttonTxt = get_option('email_buttonTxt');
+    $ohq_email_buttonUrl = get_option('email_buttonUrl');
+
+    // Check length to determin if using (if .length > 0 useWebsite = true;)
+    $ohq_email_websiteUrl = get_option('email_websiteUrl');
+    $ohq_email_fbUrl = get_option('email_fbUrl');
+    $ohq_email_twitterUrl = get_option('email_twitterUrl');
+
+    $ohq_email_logoSrc = get_option('email_logoSrc');
+
+    echo '<div style="font-size: ';
+    echo $font_baseline;
+    echo '% !important;"><p>TestingTesting</p>';
+    echo '<div id="agx-ohq"  ng-app="formApp">
       		<div ng-controller="stageController as stage">
 			<div id="ohq-overlay-parent" class="hidden" ng-class="stage.modalClass" ><div id="ohq-overlay" ></div></div>
   <p style="display: none;" id="cta_text">';
-		echo $cta_text;
-		echo '</p> <p style="display: block;" id="cta_url">';
-		echo $agx_useNinjaForm[0];
-		echo '</p>
+    echo $cta_text;
+    echo '</p> <p style="display: block;" id="cta_url">';
+    echo $agx_useNinjaForm[0];
+    echo '</p> <p style="display: none;" id="ohq_email_ctaTxt">';
+    echo $ohq_email_ctaTxt;
+    echo '</p> <p style="display: none;" id="ohq_email_hasCoupon">';
+    echo $ohq_email_hasCoupon[0];
+    echo '</p> <p style="display: none;" id="ohq_email_couponTxt">';
+    echo $ohq_email_couponTxt;
+    echo '</p> <p style="display: none;" id="ohq_email_buttonTxt">';
+    echo $ohq_email_buttonTxt;
+    echo '</p> <p style="display: none;" id="ohq_email_buttonUrl">';
+    echo $ohq_email_buttonUrl;
+    echo '</p> <p style="display: none;" id="ohq_email_websiteUrl">';
+    echo $ohq_email_websiteUrl;
+    echo '</p> <p style="display: none;" id="ohq_email_fbUrl">';
+    echo $ohq_email_fbUrl;
+    echo '</p> <p style="display: none;" id="ohq_email_twitterUrl">';
+    echo $ohq_email_twitterUrl;
+    echo '</p> <p style="display: none;" id="ohq_email_logoSrc">';
+    echo $ohq_email_logoSrc;
+    echo '</p>
    <button ng-click="stage.updateDisplay()" class="btn-ohq-modal" ng-class="stage.modalBtnOpen" id="0_btn_start_quiz" >Start Quiz</button>
-   
+
    <!-- Modal pop-up -->
     <div id="ohq-container" class="hidden" ng-class="stage.modalClass">
-	
+
 
 	  <div ng-class="stage.testBool(\'exit\') ? \'visible\' : \'hidden\'">';
-	echo do_shortcode('[ninja_form id='.$ninjaNum.']');
-	
-	
-	echo '</div>
+    echo do_shortcode('[ninja_form id='.$ninjaNum.']');
+
+
+    echo '</div>
       <!-- modular display buttons -->
 	 ';
-	echo $agx_useNinja_string;
-	echo '<button ng-click="stage.updateDisplay()"     ng-class="stage.testBool(\'exit\') ? \'btn-exit\' : \'hidden\'">X</button>
-	 
+    echo $agx_useNinja_string;
+    echo '<button ng-click="stage.updateDisplay()"     ng-class="stage.testBool(\'exit\') ? \'btn-exit\' : \'hidden\'">X</button>
+
       <!-- views will be injected here -->
       <div ui-view></div>
       </div>
     </div>
     </div>
       </div></div>';
-	
-	
+
+
 
 }
 
@@ -80,20 +112,20 @@ add_shortcode( 'agxtest', 'agx_hearing_test' );
 ?>
 <?php
 class AGX_OHQ_Plugin {
-    
+
     public function __construct(){
-        
+
         // Hook into the admin menu
         add_action('admin_menu', array($this, 'create_plugin_settings_page'));
-        
+
         add_action('admin_init', array($this, 'setup_sections'));
-        
+
         add_action('admin_init', array($this, 'setup_fields'));
-        
+
     }
-    
+
     public function create_plugin_settings_page(){
-        
+
         $page_title = 'AGX Hearing Quiz';
         $menu_title = 'AGX Hearing Quiz';
         $capability = 'manage_options';
@@ -101,125 +133,207 @@ class AGX_OHQ_Plugin {
         $callback = array( $this, 'plugin_settings_page_content');
         $icon = 'dashicons-carrot';
         $position = 100;
-        
+
         add_menu_page( $page_title, $menu_title, $capability, $slug, $callback, $icon, $position);
-        
+
     }
-    
+
     public function plugin_settings_page_content(){ ?>
-        
-        <div class="wrap">
-            <h2>AGX Online Hearing Quiz Settings</h2>
-			
-            <form method="post" action="options.php">
-                <?php 
-                    settings_fields( 'agx-hearing-test');
-                    do_settings_sections('agx-hearing-test');
-                        submit_button();
-                ?>
-            </form>
-        </div> <?php
-        
+
+<div class="wrap">
+    <h2>AGX Online Hearing Quiz Settings</h2>
+
+    <form method="post" action="options.php">
+        <?php 
+        settings_fields( 'agx-hearing-test');
+        do_settings_sections('agx-hearing-test');
+        submit_button();
+        ?>
+    </form>
+</div> <?php
+
     }
-    
+
     public function setup_sections(){
-      
-        
-		add_settings_section( 'agx_font_size', '<hr><span style="color: #0073aa; font-size: 1.25rem;">Font-sizing</span>', array( $this, 'section_callback'), 'agx-hearing-test' );
-		
-		add_settings_section( 'agx_user_action', '<hr><span style="color: #0073aa; font-size: 1.25rem;">Include Contact Form</span>', array( $this, 'section_callback'), 'agx-hearing-test' );
-		add_settings_section( 'ninja_shortcode', '<hr><span style="color: #0073aa; font-size: 1.25rem;">Link your Ninja Form</span>', array( $this, 'section_callback'), 'agx-hearing-test' );
-		add_settings_section( 'cta_url_section', '<hr><span style="color: #0073aa; font-size: 1.25rem;">Call To Action</span>', array( $this, 'section_callback'), 'agx-hearing-test' );
-        
+
+
+        add_settings_section( 'agx_font_size', '<hr><span style="color: #0073aa; font-size: 1.25rem;">Font-sizing</span>', array( $this, 'section_callback'), 'agx-hearing-test' );
+
+        add_settings_section( 'agx_user_action', '<hr><span style="color: #0073aa; font-size: 1.25rem;">Include Contact Form</span>', array( $this, 'section_callback'), 'agx-hearing-test' );
+        add_settings_section( 'ninja_shortcode', '<hr><span style="color: #0073aa; font-size: 1.25rem;">Link your Ninja Form</span>', array( $this, 'section_callback'), 'agx-hearing-test' );
+        add_settings_section( 'cta_url_section', '<hr><span style="color: #0073aa; font-size: 1.25rem;">Call To Action</span>', array( $this, 'section_callback'), 'agx-hearing-test' );
+        add_settings_section( 'results_email_section',  '<hr><span style="color: #0073aa; font-size: 1.25rem;">Results Email Section</span>',        array( $this, 'section_callback'), 'agx-hearing-test' );
+
     }
-    
+
     public function section_callback( $arguments ){
         switch( $arguments['id'] ){
-    		
-    	
-			case 'agx_font_size':
-    			echo '<p style="font-size: .85rem; margin-top: -0.75rem;">Set the base percentage for font-sizes which the rest of the AGX Online Hearing Quiz will base the sizing off of.</p>';
-    			break;
-				
-				case 'agx_user_action':
-    			echo '<p style="font-size: .85rem; margin-top: -0.75rem;">If checked, a form will appear when the user clicks the \'X\' exit button on the results page, offering to send their results and add them to an email list.</p>';
-    			break;
-				
-				case 'ninja_shortcode':
-    			echo '<p style="font-size: .85rem; margin-top: -0.75rem;"><em>If including the contact form</em></br></br>Enter in the id number from the Ninja Form shortcode you wish to link.</br> <em>For example, if your shortcode was [ninja_form id=<strong>2</strong>] you would enter <strong>"2"</strong>.</em></p>';
-    			break;
-				
-				case 'cta_url_section':
-    			echo '<p style="font-size: .85rem; margin-top: -0.75rem;">Set the text you wish to appear on the results page button and the URL you wish it to take the user to.</p>';
-    			break;
-		}
-    	}
-        
- 
-    
+
+
+            case 'agx_font_size':
+                echo '<p style="font-size: .85rem; margin-top: -0.75rem;">Set the base percentage for font-sizes which the rest of the AGX Online Hearing Quiz will base the sizing off of.</p>';
+                break;
+
+            case 'agx_user_action':
+                echo '<p style="font-size: .85rem; margin-top: -0.75rem;">If checked, a form will appear when the user clicks the \'X\' exit button on the results page, offering to send their results and add them to an email list.</p>';
+                break;
+
+            case 'ninja_shortcode':
+                echo '<p style="font-size: .85rem; margin-top: -0.75rem;"><em>If including the contact form</em></br></br>Enter in the id number from the Ninja Form shortcode you wish to link.</br> <em>For example, if your shortcode was [ninja_form id=<strong>2</strong>] you would enter <strong>"2"</strong>.</em></p>';
+                break;
+
+            case 'cta_url_section':
+                echo '<p style="font-size: .85rem; margin-top: -0.75rem;">Set the text you wish to appear on the results page button and the URL you wish it to take the user to.</p>';
+                break;
+                
+                case 'results_email_section':
+                echo '<p style="font-size: .85rem; margin-top: -0.75rem;">Use this section to specify assorted settings for the results email (if "add \'Send Results\' form?" is unchecked).</p>';
+                break;
+        }
+    }
+
+
+
     public function setup_fields() {
         $fields = array(
-        	
-			
-			array(
-        		'uid' => 'agx_font_percent',
-        		'label' => 'Font-size Baseline </br><em>(as percentage)<em>',
-        		'section' => 'agx_font_size',
-        		'type' => 'number',
-				'helper' => '%'
-        	),
-			array(
-        		'uid' => 'agx_useNinjaForm',
-        		'label' => 'Add \'Send Results\' form?',
-        		'section' => 'agx_user_action',
-        		'type' => 'checkbox',
-        		'options' => array(
-        			'agx_useNinjaForm_Yes' => 'Add Form'
-					
-        		),
+
+
+            array(
+                'uid' => 'agx_font_percent',
+                'label' => 'Font-size Baseline </br><em>(as percentage)<em>',
+                'section' => 'agx_font_size',
+                'type' => 'number',
+                'helper' => '%'
+            ),
+            array(
+                'uid' => 'agx_useNinjaForm',
+                'label' => 'Add \'Send Results\' form?',
+                'section' => 'agx_user_action',
+                'type' => 'checkbox',
+                'options' => array(
+                    'agx_useNinjaForm_Yes' => 'Add Form'
+
+                ),
                 'default' => array()
-        	),
-			
-			array(
-        		'uid' => 'ninja_number',
-        		'label' => 'Shortcode ID',
-        		'section' => 'ninja_shortcode',
-        		'type' => 'number',
-        	),
-			array(
-        		'uid' => 'cta_text',
-        		'label' => 'Call to action text:',
-        		'section' => 'cta_url_section',
-        		'type' => 'textarea',
-        	),
-			array(
-        		'uid' => 'cta_url',
-        		'label' => 'Call to action URL',
-        		'section' => 'cta_url_section',
-        		'type' => 'text',
-        		'placeholder' => 'URL here...',
-        		'helper' => 'https://www...ect',
-        		'supplimental' => 'I am underneath!',
-        	)
-        	
+            ),
+
+            array(
+                'uid' => 'ninja_number',
+                'label' => 'Shortcode ID',
+                'section' => 'ninja_shortcode',
+                'type' => 'number',
+            ),
+            array(
+                'uid' => 'cta_text',
+                'label' => 'Call to action text:',
+                'section' => 'cta_url_section',
+                'type' => 'textarea',
+            ),
+            array(
+                'uid' => 'cta_url',
+                'label' => 'Call to action URL',
+                'section' => 'cta_url_section',
+                'type' => 'text',
+                'placeholder' => 'URL here...',
+                'helper' => 'https://www...ect',
+                'supplimental' => 'I am underneath!',
+            ),
+            
+            array(
+                'uid' => 'email_ctaTxt',
+                'label' => 'Email call to action text:',
+                'section' => 'results_email_section',
+                'type' => 'textarea',
+            ),
+            array(
+                'uid' => 'email_hasCoupon',
+                'label' => 'Check to include a coupon below the CTA.',
+                'section' => 'results_email_section',
+                'type' => 'checkbox',
+                'options' => array(
+                    'agx_includeCoupon_Yes' => 'Include Coupon'
+                ),
+                'default' => array()
+            ),
+            array(
+                'uid' => 'email_couponTxt',
+                'label' => 'Email coupon text (if included):',
+                'section' => 'results_email_section',
+                'type' => 'textarea',
+            ),
+            array(
+                'uid' => 'email_buttonTxt',
+                'label' => 'Main button text (below CTA and Coupon):',
+                'section' => 'results_email_section',
+                'type' => 'text',
+                'placeholder' => 'Some Button Txt...',
+                'helper' => 'For example: Contact us today',
+                'supplimental' => 'I am underneath!',
+            ),
+            array(
+                'uid' => 'email_buttonUrl',
+                'label' => 'Main button url:',
+                'section' => 'results_email_section',
+                'type' => 'text',
+                'placeholder' => 'https://www...',
+                'helper' => 'Where should the button take them?',
+                'supplimental' => 'I am underneath!',
+            ),
+            array(
+                'uid' => 'email_websiteUrl',
+                'label' => 'Website URL (icon under button)',
+                'section' => 'results_email_section',
+                'type' => 'text',
+                'placeholder' => 'https://www...',
+                'helper' => '!!! Leave blank if not using !!!',
+                'supplimental' => 'I am underneath!',
+            ),
+            array(
+                'uid' => 'email_fbUrl',
+                'label' => 'Facebook URL (icon under button)',
+                'section' => 'results_email_section',
+                'type' => 'text',
+                'placeholder' => 'https://www...',
+                'helper' => '!!! Leave blank if not using !!!',
+                'supplimental' => 'I am underneath!',
+            ),
+            array(
+                'uid' => 'email_twitterUrl',
+                'label' => 'Twitter URL (icon under button)',
+                'section' => 'results_email_section',
+                'type' => 'text',
+                'placeholder' => 'https://www...',
+                'helper' => '!!! Leave blank if not using !!!',
+                'supplimental' => 'I am underneath!',
+            ),
+            array(
+                'uid' => 'email_logoSrc',
+                'label' => 'Member Logo Source (URL)',
+                'section' => 'results_email_section',
+                'type' => 'text',
+                'placeholder' => 'https://www...',
+                'helper' => 'File pathway for member logo image (200px wide)',
+                'supplimental' => 'I am underneath!',
+            )
+
         );
-    	foreach( $fields as $field ){
-        	add_settings_field( $field['uid'], $field['label'], array( $this, 'field_callback' ), 'agx-hearing-test', $field['section'], $field );
+        foreach( $fields as $field ){
+            add_settings_field( $field['uid'], $field['label'], array( $this, 'field_callback' ), 'agx-hearing-test', $field['section'], $field );
             register_setting( 'agx-hearing-test', $field['uid'] );
-    	}
+        }
     }
-    
+
     public function field_callback( $arguments ){
-        
+
         $value = get_option( $arguments['uid'] );
         // get current value if there is one
         // if no argument exists
         if( ! $value ) {
             // set to our default
             $value = $arguments['default'];
-            
+
         }
-        
+
         // Check which type of field we want
         switch( $arguments['type'] ){
             case 'text':
@@ -258,22 +372,22 @@ class AGX_OHQ_Plugin {
                 break;
         }
 
-        
+
         //if there is help text
         if( $helper = $arguments[ 'helper' ] ){
             printf( '<span class="helper"> %s</span>',
-                  $helper ); // show it
+                   $helper ); // show it
         }
-        
+
         if( $supplimental = $arguments[ 'supplemental' ]){
             printf( '<p class="description">%s</p>',
-                  $supplimental ); // show it
+                   $supplimental ); // show it
         }
         // echo '<input name="ninja_shortcode" id="ninja_shortcode" type="text" value="' . get_option('ninja_shortcode' ) . '" />';
-        
+
     }
-    
-    }
-    
+
+}
+
 
 new AGX_OHQ_Plugin();
