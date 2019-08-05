@@ -12,7 +12,7 @@ angular.module('formApp').controller('resultsController', ['$scope', 'resultsObj
     results.cta_text = resultsObj.cta_text;
     console.log(results.cta_url);
     results.cta_url = resultsObj.cta_url;
-
+results.scoreSummaryTxt = '';
     results.totalScore = {
         name: 'totalScore',
         percentScore: 0,
@@ -23,7 +23,8 @@ angular.module('formApp').controller('resultsController', ['$scope', 'resultsObj
         color: '#cf504e',
         border: '"' + ("solid " + results.color + " 1px") + '"',
         copy: '',
-        copyOptions: ['Based on your results, we highly recommend coming in for a hearing screening. Click below to find an AudigyCertified Practice near you!', 'Based on your results, it\'s likely you would greatly benefit from professionally fitted hearing technology. Click below to find an AudigyCertified Practice near you!', 'Based on your results, it is likely you would benefit from a hearing screening. Click below to find an AudigyCertified Practice near you!', 'You scored very well. However there are still additional things that our professionals can help you address, such as custom hearing protection and tinnitus solutions. Click below to find an AudigyCertified practice near you!', 'You got a perfect score! However, since this is only an online test, it\'s still possible you may have a hearing loss. Click below to find an AudigyCertified practice near you!']
+        copyOptions: ['Based on your results, we highly recommend coming in for a hearing screening. Click below to find an AudigyCertified Practice near you!', 'Based on your results, it\'s likely you would greatly benefit from professionally fitted hearing technology. Click below to find an AudigyCertified Practice near you!', 'Based on your results, it is likely you would benefit from a hearing screening. Click below to find an AudigyCertified Practice near you!', 'You scored very well. However there are still additional things that our professionals can help you address, such as custom hearing protection and tinnitus solutions. Click below to find an AudigyCertified practice near you!', 'You got a perfect score! However, since this is only an online test, it\'s still possible you may have a hearing loss. Click below to find an AudigyCertified practice near you!'],
+        copyOptionsNoCTA: ['Based on your results, we highly recommend coming in for a hearing screening.', 'Based on your results, it\'s likely you would greatly benefit from professionally fitted hearing technology.', 'Based on your results, it is likely you would benefit from a hearing screening.', 'You scored very well. However there are still additional things that our professionals can help you address, such as custom hearing protection and tinnitus solutions.', 'You got a perfect score! However, since this is only an online test, it\'s still possible you may have a hearing loss.']
     }
 
     results.quizScore = {
@@ -88,7 +89,7 @@ angular.module('formApp').controller('resultsController', ['$scope', 'resultsObj
         percentDividend = Math.floor(percentDividend);
 
         results.totalScore.copy = results.totalScore.copyOptions[percentDividend];
-
+        results.resultsCopy = results.totalScore.copyOptionsNoCTA[percentDividend];
         console.log(percentDividend);
         console.log(results.totalScore.copy);
         console.log(results.totalScore.copyOptions[percentDividend]);
@@ -180,15 +181,17 @@ angular.module('formApp').controller('resultsController', ['$scope', 'resultsObj
         // update quiz percent and array
         resultsEmail.quizPercent = results.quizScore.percentScore;
         resultsEmail.quizMissed = results.wrongAns.quizAns;
+        resultsEmail.quizSectionSubhead = "Environments in which you may struggle to hear:";
 
         // update tone percent and array
         resultsEmail.freqPercent = results.toneScore.percentScore;
         resultsEmail.freqMissed = results.wrongAns.toneAns;
-
+resultsEmail.freqSectionSubhead = "Frequencies you may struggle to hear:";
 
         // update speech percent and array
         resultsEmail.speechPercent = results.speechScore.percentScore;
         resultsEmail.speechMissed = results.wrongAns.speechAnsClean;
+resultsEmail.speechSectionSubhead = "Words you may struggle to hear:";
 
         console.log(resultsEmail);
 
@@ -203,7 +206,7 @@ angular.module('formApp').controller('resultsController', ['$scope', 'resultsObj
 
         console.log(iconArray);
 
-        var emailHTML = "<table width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"background-color: #d3d3d3;\"><tr><td><table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"600px\" style=\"border-collapse: collapse; background-color: #ffffff; padding: 20px 20px 20px 20px;\" ><tr align=\"center\"><td bgcolor=\"#ffffff\" style=\"padding: 10px 10px 10px 10px; \"><img src=\"AGXHearing_Logo.png\" style=\"display: block;\" width=\"150px\"/></td></tr><tr align=\"center\"><td bgcolor=\"#ffffff\" style=\"padding: 0px 10px 0px 10px; \"><p width=\"100%\" style=\"display: block; font-size: 30px;\"><strong>Your AGX Hearing Quiz Results</strong></p></td></tr><tr><td bgcolor=\"#ffffff\" style=\"padding: 10px 10px 10px 10px;\">";
+        var emailHTML = "<table width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"background-color: #d3d3d3; font-family: arial, sans-serif;\"><tr><td><table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"600px\" style=\"border-collapse: collapse; background-color: #ffffff; padding: 20px 20px 20px 20px;\" ><tr align=\"center\"><td bgcolor=\"#ffffff\" style=\"padding: 10px 10px 10px 10px; \"><img src=\"AGXHearing_Logo.png\" style=\"display: block;\" width=\"150px\"/></td></tr><tr align=\"center\"><td bgcolor=\"#ffffff\" style=\"padding: 0px 10px 0px 10px; \"><p width=\"100%\" style=\"display: block; font-size: 30px;\"><strong>Your AGX Hearing Quiz Results</strong></p></td></tr><tr><td bgcolor=\"#ffffff\" style=\"padding: 10px 10px 10px 10px;\">";
 
         // ** 1. Answer Arrays to Bullets
 
@@ -222,14 +225,14 @@ angular.module('formApp').controller('resultsController', ['$scope', 'resultsObj
         // ** 2. Build out each quiz section's html
 
         // build quiz section
-        resultsSectionBuild(resultsEmail.quizPercent, resultsEmail.quizSectionName, resultsEmail.quizSectionColor, resultsEmail.quizSectionShade, resultsEmail.quizBullets);
+        resultsSectionBuild(resultsEmail.quizPercent, resultsEmail.quizSectionName, resultsEmail.quizSectionColor, resultsEmail.quizSectionShade, resultsEmail.quizSectionSubhead, resultsEmail.quizBullets);
 
         // build freq section
         resultsSectionBuild(resultsEmail.freqPercent, resultsEmail.freqSectionName, resultsEmail.freqSectionColor, resultsEmail.freqSectionShade,
-            resultsEmail.freqBullets);
+            resultsEmail.freqSectionSubhead, resultsEmail.freqBullets);
 
         // build speech section
-        resultsSectionBuild(resultsEmail.speechPercent, resultsEmail.speechSectionName, resultsEmail.speechSectionColor, resultsEmail.speechSectionShade, resultsEmail.speechBullets);
+        resultsSectionBuild(resultsEmail.speechPercent, resultsEmail.speechSectionName, resultsEmail.speechSectionColor, resultsEmail.speechSectionShade, resultsEmail.speechSectionSubhead, resultsEmail.speechBullets);
 
 
         // ** 3. Build out CTA section HTML
@@ -240,7 +243,7 @@ angular.module('formApp').controller('resultsController', ['$scope', 'resultsObj
             tempCouponTxt = "";
         };
 
-        var ctaHTML = ("</td></tr><tr><td><table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"border-collapse= collapse; max-width: 540px;\"><tr><td align=\"center\" style=\"color: #000000; font-size: 20px; padding: 10px 10px 10px 10px;\">" + resultsEmail.ctaTxt + "</td></tr>" + tempCouponTxt + "<tr width=\"100%\"><td align=\"center\" width=\"100%\" style=\"font-size: 20px; padding: 20px 10px 20px 10px;\"><a href=\"" + resultsEmail.buttonUrl + "\" style=\"color: #ffffff; background-color: #008aab; padding: 10px 10px 10px 10px; border-bottom: 3px solid #00738f;\">" + resultsEmail.buttonTxt + "</a></td></tr></table></td></tr>");
+        var ctaHTML = ("</td></tr><tr><td><table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"border-collapse= collapse; max-width: 540px;\"><tr><td align=\"center\" style=\"color: #000000; font-size: 20px; padding: 10px 10px 10px 10px;\">" + results.resultsCopy + "</td></tr><tr><td align=\"center\" style=\"color: #000000; font-size: 20px; padding: 10px 10px 10px 10px;\">" + resultsEmail.ctaTxt + "</td></tr>" + tempCouponTxt + "<tr width=\"100%\"><td align=\"center\" width=\"100%\" style=\"font-size: 20px; padding: 20px 10px 20px 10px;\"><a href=\"" + resultsEmail.buttonUrl + "\" style=\"color: #ffffff; background-color: #008aab; padding: 10px 10px 10px 10px; border-bottom: 3px solid #00738f;\">" + resultsEmail.buttonTxt + "</a></td></tr></table></td></tr>");
 
         emailHTML = (emailHTML + ctaHTML);
 
@@ -273,11 +276,12 @@ angular.module('formApp').controller('resultsController', ['$scope', 'resultsObj
 
         emailHTML = (emailHTML + logoSectionBuild);
 
-        function resultsSectionBuild(sectionPercent, sectionName, sectionColor, sectionShade, sectionBullets) {
+        function resultsSectionBuild(sectionPercent, sectionName, sectionColor, sectionShade, sectionSubhead, sectionBullets) {
 
-            var returnString = ("<table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"border-collapse: collapse;\"><tr><td bgcolor=\"" + sectionColor + "\" width=\"15%\" align=\"center\" style=\"color: #ffffff; font-size: 30px; padding: 10px 10px 10px 10px; border-bottom: 3px solid " + sectionShade + ";\"><strong>" + sectionPercent + "</strong>%</td><td width=\"85%\" align=\"left\" style=\"color: " + sectionShade + "; font-size: 25px; padding: 10px 10px 10px 10px;\">" + sectionName + "</td></tr><tr><td  width=\"15%\" align=\"center\" style=\"font-size: 30px;\">&nbsp;</td><td bgcolor=\"#ffffff\" width=\"85%\" align=\"left\" style=\"color: #000000; font-size: 15px; padding: 10px 10px 5px 10px; border-top: 3px solid " + sectionShade + ";\"><strong>Environments you may struggle to hear in:</strong></td></tr><tr><td >&nbsp;</td><td align=\"left\" style=\"color: #000000; font-size: 15px; padding: 0px 8px 8px 8px;\">" + sectionBullets + "</td></tr></table>");
+            var returnString = ("<table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"border-collapse: collapse;\"><tr><td bgcolor=\"" + sectionColor + "\" width=\"15%\" align=\"center\" style=\"color: #ffffff; font-size: 30px; padding: 10px 10px 10px 10px; border-bottom: 3px solid " + sectionShade + ";\"><strong>" + sectionPercent + "</strong>%</td><td width=\"85%\" align=\"left\" style=\"color: " + sectionShade + "; font-size: 25px; padding: 10px 10px 10px 10px;\">" + sectionName + "</td></tr><tr><td  width=\"15%\" align=\"center\" style=\"font-size: 30px;\">&nbsp;</td><td bgcolor=\"#ffffff\" width=\"85%\" align=\"left\" style=\"color: #000000; font-size: 15px; padding: 10px 10px 5px 10px; border-top: 3px solid " + sectionShade + ";\"><strong>" + sectionSubhead + "</strong></td></tr><tr><td >&nbsp;</td><td align=\"left\" style=\"color: #000000; font-size: 15px; padding: 0px 8px 8px 8px;\">" + sectionBullets + "</td></tr></table>");
 
             emailHTML = (emailHTML + returnString);
+            
 
 
         };
@@ -350,7 +354,6 @@ angular.module('formApp').controller('resultsController', ['$scope', 'resultsObj
 
             return allIconBlocks;
         };
-
         console.log(emailHTML);
     };
 }])

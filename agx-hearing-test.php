@@ -60,6 +60,7 @@ function agx_hearing_test($content) {
     echo $cta_text;
     echo '</p> <p style="display: block;" id="cta_url">';
     echo $agx_useNinjaForm[0];
+    echo 'testing testing';
     echo '</p> <p style="display: none;" id="ohq_email_ctaTxt">';
     echo $ohq_email_ctaTxt;
     echo '</p> <p style="display: none;" id="ohq_email_hasCoupon">';
