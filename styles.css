@@ -1139,3 +1139,12 @@ RESPONSIVE STYLES
     width: 80%
   }
 }
+
+/* ninja form required field style */
+.nf-form-fields-required {
+    font-size: .8rem;
+    font-style: italic;
+    margin-top: -9px;
+    margin-bottom: 20px;
+    padding-top: 0;
+}

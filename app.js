@@ -48,19 +48,23 @@ formApp.value('resultsObj', {
 
         // email_websiteUrl
         websiteUrl: "",
-        websiteIconSrc: "IconPlaceholder.png",
-
+        websiteIconSrc: 'https://images.benchmarkemail.com/client444013/image7397365.png',
+        /* websiteIconSrc: "/wp-content/plugins/OHQ_2.0/img/SM_Icons_Website.png",
+*/
         useFb: false,
 
         // email_fbUrl
         fbUrl: "",
-        fbIconSrc: "",
+        fbIconSrc: "https://images.benchmarkemail.com/client444013/image7397372.png",
+        /* fbIconSrc: "/wp-content/plugins/OHQ_2.0/img/SM_Icons_FB.png", */
 
         useTwitter: false,
 
         // email_twitterUrl
         twitterUrl: "",
-        twitterIconSrc: "",
+        twitterIconSrc: 'https://images.benchmarkemail.com/client444013/image7397370.png',
+        /*
+        twitterIconSrc: "/wp-content/plugins/OHQ_2.0/img/SM_Icons_Twitter.png",*/
 
         // email_logoSrc
         logoSrc: "AwesomeAudiology_Reversed.png",

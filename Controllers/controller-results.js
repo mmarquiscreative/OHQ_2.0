@@ -247,11 +247,20 @@ resultsEmail.speechSectionSubhead = "Words you may struggle to hear:";
 
         emailHTML = (emailHTML + ctaHTML);
 
-        // ** 4. Build out IconLink section HTML
+      
+
+
+        // ** 4. Build out member logo section HTML
+
+        var logoSectionBuild = ("<tr><td><table bgcolor=\"#512D6D\" align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"border-collapse= collapse; padding: 10px 10px 10px 10px;\"><tr align=\"center\"  style=\"color: #ffffff; font-size: 20px; padding: 10px 10px 10px 10px;\"><td width=\"33%\" style=\"padding: 10px 10px 10px 10px;\"><img src=\"" + resultsEmail.logoSrc + "\" style=\"display: block;\" width=\"200px\"/></td></tr></table>")
+
+        emailHTML = (emailHTML + logoSectionBuild);
+
+  // ** 4. Build out IconLink section HTML
 
         // count icons being used
         var iconCount = countIcons();
-
+console.log("iconCount = " + iconCount);
         // set icon td width
         var iconBlockWidth = 30;
         iconWidthCalc();
@@ -264,17 +273,10 @@ resultsEmail.speechSectionSubhead = "Words you may struggle to hear:";
         var allIconBlocks = assembleIconBlocks();
         console.log(allIconBlocks);
 
-        var iconSectionBuild = ("<tr><td><table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"border-collapse= collapse; padding: 10px 10px 10px 10px;\"><tr align=\"center\" bgcolor=\"#512D6D\" height=\"120px\"style=\"color: #ffffff; font-size: 20px;\">" + allIconBlocks + "</tr></table>");
+        var iconSectionBuild = ("<table bgcolor=\"#512D6D\"  align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"border-collapse= collapse; padding: 0;\"><tr align=\"center\" height=\"120px\"style=\"color: #ffffff; font-size: 20px;\">" + allIconBlocks + "</tr></table></td></tr></table></td></tr></table>");
 
         // update emailHTML
         emailHTML = (emailHTML + iconSectionBuild);
-
-
-        // ** 4. Build out member logo section HTML
-
-        var logoSectionBuild = ("<table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"border-collapse= collapse; padding: 10px 10px 10px 10px;\"><tr align=\"center\" bgcolor=\"#512D6D\" style=\"color: #ffffff; font-size: 20px; padding: 10px 10px 10px 10px;\"><td width=\"33%\" style=\"padding: 10px 10px 10px 10px;\"><img src=\"" + resultsEmail.logoSrc + "\" style=\"display: block;\" width=\"200px\"/></td></tr></table></td></tr></table></td></tr></table>")
-
-        emailHTML = (emailHTML + logoSectionBuild);
 
         function resultsSectionBuild(sectionPercent, sectionName, sectionColor, sectionShade, sectionSubhead, sectionBullets) {
 
@@ -301,7 +303,7 @@ resultsEmail.speechSectionSubhead = "Words you may struggle to hear:";
         function iconBlockBuild(iconLinkObject) {
 
             var returnString = ("<td width=\"" + iconBlockWidth + "%\"><a href=\"" + iconLinkObject.url + "\" target = \"_blank\" style=\" color: #ffffff;\"><img src=\"" + iconLinkObject.iconSrc + "\" style=\"display: block; text-decoration: none;\"/>" + iconLinkObject.txt + "</a></td>");
-
+            console.log(returnString);
             return returnString;
         }
 
@@ -342,10 +344,13 @@ resultsEmail.speechSectionSubhead = "Words you may struggle to hear:";
             var fillerHTML = "<td width=\"" + iconBlockWidth + "%\">&nbsp;</td>";
 
             iconArray.forEach(function (cur) {
-                if (cur.use) {
+            console.log(cur)
+                if (cur.url.length > 0) {
                     tempTxt = iconBlockBuild(cur);
                     allIconBlocks = (allIconBlocks + tempTxt);
                 };
+                console.log("iconCount is " + iconCount);
+                console.log("allIconBlocks is " + allIconBlocks);
             });
 
             if (iconCount === 2) {
