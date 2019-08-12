@@ -95,7 +95,6 @@ formApp.value('resultsObj', {
         speechBullets: ""
     },
     restartTest: function(){
-        
         console.log('running restart test');
         // 1. reset Quiz
         

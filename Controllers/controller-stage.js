@@ -25,6 +25,8 @@ angular.module('formApp').controller('stageController', ['$scope', '$state', 're
 
     };
 
+    stage.formAfterResults = false;
+    stage.formBeforeResults = true;
 
 
     stage.ohq_email_couponTxt = document.querySelector('#ohq_email_couponTxt').textContent;
@@ -121,6 +123,8 @@ angular.module('formApp').controller('stageController', ['$scope', '$state', 're
                 break;
             case 'results':
                 returnBool = $state.$current.includes['stage.results'];
+                stage.formAfterResults = true;
+                stage.formBeforeResults = false;
                 break;
             case 'exit':
                 returnBool = $state.$current.includes['stage.exit'];
@@ -128,15 +132,21 @@ angular.module('formApp').controller('stageController', ['$scope', '$state', 're
             default:
                 console.log('stage.testBool no match');
                 break;
-        }
+        };
         return returnBool;
-    }
+    };
 
     stage.restart = function () {
         resultsObj.restartTest();
-        $state.go('stage.intro');
+stage.formAfterResults = false;
+                stage.formBeforeResults = true;
+                $state.go('stage.intro');
     };
-
+stage.hasResults = function (){
+console.log('has results run');
+return stage.resultsReady;
+console.log('has results finish');
+};
    stage.loadForm = function(){
 
 	console.log('running test form');

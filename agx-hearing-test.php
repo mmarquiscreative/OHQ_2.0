@@ -14,6 +14,8 @@ require_once 'scripts.php';
 
 
 function agx_hearing_test($content) {
+    
+
     $agx_useNinja_no = '<button ng-click="stage.updateDisplay()"	   ng-class="stage.testBool(\'exit\') ? \'hidden\' : \'btn-exit\'" id="x_btn_exit">X</button>
 		 <!-- <button ui-sref="stage.exit" ng-click="stage.loadForm()"		   ng-class="stage.testBool(\'results\') ? \'btn-exit\' : \'hidden\'">X</button> -->';
 
@@ -34,7 +36,7 @@ function agx_hearing_test($content) {
         $agx_useNinja_string = $agx_useNinja_no;
     };
 
-    $ohq_email_ctaTxt = get_option('email_ctaTxt');
+$ohq_email_ctaTxt = get_option('email_ctaTxt');
 
     // checkbox
     $ohq_email_hasCoupon = get_option('email_hasCoupon');
@@ -81,19 +83,28 @@ function agx_hearing_test($content) {
    <button ng-click="stage.updateDisplay()" class="btn-ohq-modal" ng-class="stage.modalBtnOpen" id="0_btn_start_quiz" >Start Quiz</button>
 
    <!-- Modal pop-up -->
-    <div id="ohq-container" class="hidden" ng-class="stage.modalClass">
+    <div id="ohq-container" class="hidden" ng-class="stage.modalClass">';
 
-
-	  <div ng-class="stage.testBool(\'exit\') ? \'visible\' : \'hidden\'">
-       <div class="exit-body">
-       <h3>NOT READY TO SPEAK TO A HEARING EXPERT?</h3>
+ /* echo do_shortcode('[ninja_form id='.$ninjaNum.']'); */
+echo '<div ng-class="stage.testBool(\'exit\') ? \'visible\' : \'hidden\'">
+       <div class="exit-body">a
+       <div  id="ohqResultsEmailForm"><div  ng-show="{{stage.formAfterResults}}">
+       <h3>Form 1 NOT READY TO SPEAK TO A HEARING EXPERT?</h3>
+       <p>Get your hearing quiz results emailed to you and learn more about better hearing.</p>';
+       
+   echo do_shortcode('[ninja_form id=1]'); 
+    
+    echo '<div class="disclaimer">By entering your email address you agree to share your email with xxPracticeNamexx.</div></div>';
+    
+    echo '<div ng-show="{{stage.formBeforeResults}}" ><div id="ohqResultsEmailForm">
+       <h3>ninja form 2</h3>
        <p>Get your hearing quiz results emailed to you and learn more about better hearing.</p>
     ';
-    echo do_shortcode('[ninja_form id='.$ninjaNum.']');
-
-
-    echo '<div class="disclaimer">By entering your email address you agree to share your email with xxPracticeNamexx.</div>
-  </div></div>
+    echo do_shortcode('[ninja_form id=2]');
+    
+    echo '<div class="disclaimer">By entering your email address you agree to share your email with xxPracticeNamexx.</div></div></div></div>';
+    
+    echo '</div></div>
       <!-- modular display buttons -->
 	 ';
     echo $agx_useNinja_string;
@@ -102,7 +113,7 @@ function agx_hearing_test($content) {
       <!-- views will be injected here -->
       <div ui-view></div>
       </div>
-    </div>
+   
     </div>
       </div></div>';
 

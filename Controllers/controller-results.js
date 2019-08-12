@@ -2,7 +2,7 @@ angular.module('formApp').controller('resultsController', ['$scope', 'resultsObj
 
     // Uses keyword to keep $scope specific to this controller
     var results = this;
-
+    
     //// ---- VARIABLES ---- ////
     results.wrongAns = resultsObj;
     results.wrongAns.speechAnsClean = removeDuplicates(results.wrongAns.speechAns);
