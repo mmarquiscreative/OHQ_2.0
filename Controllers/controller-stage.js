@@ -89,9 +89,18 @@ angular.module('formApp').controller('stageController', ['$scope', '$state', 're
             console.log('ohq-modal-active ===> ohq-modal');
             $state.go('stage.intro');
             resultsObj.restartTest();
+            stage.formAfterResults = false;
+    stage.formBeforeResults = true;
         } else {
             console.log('No match. Current style is ' + stage.modalClass);
         };
+        
+        setTimeout(function(){
+                // 2. compare answers to key
+ $scope.$apply(function(){
+                console.log('apply ng-show change for exit');
+            });
+            }, 100);
     };
 
 

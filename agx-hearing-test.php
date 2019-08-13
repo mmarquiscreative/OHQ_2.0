@@ -24,7 +24,8 @@ function agx_hearing_test($content) {
 
     $agx_useNinja_string = '';
 
-    $ninjaNum = get_option('ninja_number');
+    $ninjaNum_results = get_option('ninja_number_results');
+    $ninjaNum_subscribe = get_option('ninja_number_subscribe');
     $cta_text = get_option('cta_text');
     $cta_url = get_option('cta_url');
     $font_baseline = get_option('agx_font_percent');
@@ -92,15 +93,15 @@ echo '<div ng-class="stage.testBool(\'exit\') ? \'visible\' : \'hidden\'">
        <h3>Form 1 NOT READY TO SPEAK TO A HEARING EXPERT?</h3>
        <p>Get your hearing quiz results emailed to you and learn more about better hearing.</p>';
        
-   echo do_shortcode('[ninja_form id=1]'); 
+   echo do_shortcode('[ninja_form id='.$ninjaNum_results.']'); 
     
     echo '<div class="disclaimer">By entering your email address you agree to share your email with xxPracticeNamexx.</div></div>';
     
     echo '<div  ng-show="stage.formBeforeResults"  ><div id="ohqResultsEmailForm">
        <h3>ninja form 2</h3>
-       <p>Get your hearing quiz results emailed to you and learn more about better hearing.</p>
+       <p>Sign up for our enewsletter?</p>
     ';
-    echo do_shortcode('[ninja_form id=2]');
+    echo do_shortcode('[ninja_form id='.$ninjaNum_subscribe.']');
     
     echo '<div class="disclaimer">By entering your email address you agree to share your email with xxPracticeNamexx.</div></div></div></div>';
     
@@ -194,7 +195,7 @@ class AGX_OHQ_Plugin {
                 break;
 
             case 'ninja_shortcode':
-                echo '<p style="font-size: .85rem; margin-top: -0.75rem;"><em>If including the contact form</em></br></br>Enter in the id number from the Ninja Form shortcode you wish to link.</br> <em>For example, if your shortcode was [ninja_form id=<strong>2</strong>] you would enter <strong>"2"</strong>.</em></p>';
+                echo '<p style="font-size: .85rem; margin-top: -0.75rem;"><em>If including the contact form</em></br></br>Enter in the id numbers from the Ninja Form shortcodes you wish to link.</br> <em>For example, if your shortcode was [ninja_form id=<strong>2</strong>] you would enter <strong>"2"</strong>.</em></p>';
                 break;
 
             case 'cta_url_section':
@@ -233,8 +234,14 @@ class AGX_OHQ_Plugin {
             ),
 
             array(
-                'uid' => 'ninja_number',
-                'label' => 'Shortcode ID',
+                'uid' => 'ninja_number_results',
+                'label' => 'Shortcode ID (for results email)',
+                'section' => 'ninja_shortcode',
+                'type' => 'number',
+            ),
+             array(
+                'uid' => 'ninja_number_subscribe',
+                'label' => 'Shortcode ID (to subscribe to enewsletter)',
                 'section' => 'ninja_shortcode',
                 'type' => 'number',
             ),
