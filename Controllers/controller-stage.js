@@ -97,8 +97,6 @@ angular.module('formApp').controller('stageController', ['$scope', '$state', 're
 
     /* END: Modal Functionality */
 
-
-
     stage.testBool = function (stageName) {
         var returnBool;
 
@@ -123,8 +121,20 @@ angular.module('formApp').controller('stageController', ['$scope', '$state', 're
                 break;
             case 'results':
                 returnBool = $state.$current.includes['stage.results'];
+                if($state.$current.includes['stage.results']) {
+                console.log('returnBool is' + returnBool);
                 stage.formAfterResults = true;
                 stage.formBeforeResults = false;
+                console.log('formAfter is ' + stage.formAfterResults);
+                console.log('formBefore is ' + stage.formBeforeResults);
+
+setTimeout(function(){
+                // 2. compare answers to key
+ $scope.$apply(function(){
+                console.log('apply ng-show change for exit');
+            });
+            }, 100);
+};
                 break;
             case 'exit':
                 returnBool = $state.$current.includes['stage.exit'];
@@ -133,14 +143,29 @@ angular.module('formApp').controller('stageController', ['$scope', '$state', 're
                 console.log('stage.testBool no match');
                 break;
         };
+        
+        
+            
+        if(returnBool === undefined){
+        returnBool = false;
+        };
+        
+        
         return returnBool;
     };
+
 
     stage.restart = function () {
         resultsObj.restartTest();
 stage.formAfterResults = false;
                 stage.formBeforeResults = true;
                 $state.go('stage.intro');
+                setTimeout(function(){
+                // 2. compare answers to key
+ $scope.$apply(function(){
+                console.log('apply ng-show change for exit');
+            });
+            }, 100);
     };
 stage.hasResults = function (){
 console.log('has results run');
