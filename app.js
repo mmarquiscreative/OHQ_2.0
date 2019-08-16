@@ -8,6 +8,8 @@ formApp.value('answerStrings', ['Bean', 'Chalk', 'Goose', 'Kite', 'Moon', 'Page'
 
 // results object to save individual sections wrong answers to
 formApp.value('resultsObj', {
+formAfterResults: false,
+formAfterResults: true,
 	cta_text: '',
 	cta_url: '',
 	bgNoiseIncrease: 0.05,
@@ -48,26 +50,25 @@ formApp.value('resultsObj', {
 
         // email_websiteUrl
         websiteUrl: "",
-        websiteIconSrc: 'https://images.benchmarkemail.com/client444013/image7397365.png',
-        /* websiteIconSrc: "/wp-content/plugins/OHQ_2.0/img/SM_Icons_Website.png",
-*/
+        websiteIconSrc: "/wp-content/plugins/OHQ_2.0/img/SM_Icons_Website.png",
+
         useFb: false,
 
         // email_fbUrl
         fbUrl: "",
-        fbIconSrc: "https://images.benchmarkemail.com/client444013/image7397372.png",
-        /* fbIconSrc: "/wp-content/plugins/OHQ_2.0/img/SM_Icons_FB.png", */
+        fbIconSrc: "/wp-content/plugins/OHQ_2.0/img/SM_Icons_FB.png", 
 
         useTwitter: false,
 
         // email_twitterUrl
         twitterUrl: "",
-        twitterIconSrc: 'https://images.benchmarkemail.com/client444013/image7397370.png',
-        /*
-        twitterIconSrc: "/wp-content/plugins/OHQ_2.0/img/SM_Icons_Twitter.png",*/
+        twitterIconSrc: "/wp-content/plugins/OHQ_2.0/img/SM_Icons_Twitter.png",
 
         // email_logoSrc
         logoSrc: "AwesomeAudiology_Reversed.png",
+        
+         // email_agxlogoSrc
+        agxlogoSrc: "/wp-content/plugins/OHQ_2.0/img/AGX-Hearing-Color.png",
 
         // ** Pre-filled by quiz
         quizSectionName: "Listening Environments",

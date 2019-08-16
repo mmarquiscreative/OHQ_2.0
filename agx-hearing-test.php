@@ -89,7 +89,7 @@ $ohq_email_ctaTxt = get_option('email_ctaTxt');
  /* echo do_shortcode('[ninja_form id='.$ninjaNum.']'); */
 echo '<div ng-class="stage.testBool(\'exit\') ? \'visible\' : \'hidden\'">
        <div class="exit-body">a
-       <div  id="ohqResultsEmailForm">b<div  ng-show="stage.formAfterResults" >c
+       <div  id="ohqResultsEmailForm">b<div  ng-show="stage.resultsObj.formAfterResults" >c
        <h3>Form 1 NOT READY TO SPEAK TO A HEARING EXPERT?</h3>
        <p>Get your hearing quiz results emailed to you and learn more about better hearing.</p>';
        
@@ -97,7 +97,7 @@ echo '<div ng-class="stage.testBool(\'exit\') ? \'visible\' : \'hidden\'">
     
     echo '<div class="disclaimer">By entering your email address you agree to share your email with xxPracticeNamexx.</div></div>';
     
-    echo '<div  ng-show="stage.formBeforeResults"  ><div id="ohqResultsEmailForm">
+    echo '<div  ng-show="stage.resultsObj.formBeforeResults"  ><div id="ohqResultsEmailForm">
        <h3>ninja form 2</h3>
        <p>Sign up for our enewsletter?</p>
     ';

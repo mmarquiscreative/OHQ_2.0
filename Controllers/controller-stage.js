@@ -24,9 +24,10 @@ angular.module('formApp').controller('stageController', ['$scope', '$state', 're
         resultsObj.resultsEmail.hasCoupon = false;
 
     };
-
-    stage.formAfterResults = false;
-    stage.formBeforeResults = true;
+stage.resultsObj = resultsObj;
+console.log(stage.resultsObj);
+    stage.resultsObj.formAfterResults = false;
+    stage.resultsObj.formBeforeResults = true;
 
 
     stage.ohq_email_couponTxt = document.querySelector('#ohq_email_couponTxt').textContent;
@@ -89,8 +90,8 @@ angular.module('formApp').controller('stageController', ['$scope', '$state', 're
             console.log('ohq-modal-active ===> ohq-modal');
             $state.go('stage.intro');
             resultsObj.restartTest();
-            stage.formAfterResults = false;
-    stage.formBeforeResults = true;
+            stage.resultsObj.formAfterResults = false;
+    stage.resultsObj.formBeforeResults = true;
         } else {
             console.log('No match. Current style is ' + stage.modalClass);
         };
@@ -130,21 +131,8 @@ angular.module('formApp').controller('stageController', ['$scope', '$state', 're
                 break;
             case 'results':
                 returnBool = $state.$current.includes['stage.results'];
-                if($state.$current.includes['stage.results']) {
-                console.log('returnBool is' + returnBool);
-                stage.formAfterResults = true;
-                stage.formBeforeResults = false;
-                console.log('formAfter is ' + stage.formAfterResults);
-                console.log('formBefore is ' + stage.formBeforeResults);
-
-setTimeout(function(){
-                // 2. compare answers to key
- $scope.$apply(function(){
-                console.log('apply ng-show change for exit');
-            });
-            }, 100);
-};
                 break;
+
             case 'exit':
                 returnBool = $state.$current.includes['stage.exit'];
                 break;
@@ -185,7 +173,6 @@ console.log('has results finish');
 
 	console.log('running test form');
 
-	document.querySelector("#nf-field-5").value = 'test';
 	/* var quizResults = document.querySelector(".nf-hearing-results");
 	var toneResults = document.querySelector(".nf-tone-results");
 	var speechResults = document.querySelector(".ninja-forms-field.nf-speech-results.nf-element");

@@ -74,9 +74,38 @@ results.scoreSummaryTxt = '';
     rotateFill('toneScore');
     rotateFill('speechScore');
 
+// updates ng-show variables so that form on 'x' click is email results form
+                resultsObj.formAfterResults = true;
+                resultsObj.formBeforeResults = false;
+                console.log('formAfter is ' +  resultsObj.formAfterResults);
+                console.log('formBefore is ' + resultsObj.formBeforeResults);
+                
+// updates angularJS so ng-show change is noted and forms actually switch
+setTimeout(function(){
+                // 2. compare answers to key
+ $scope.$apply(function(){
+                console.log('apply ng-show change for exit');
+            });
+            }, 100);
+            
+            
     resultsCopy();
 
-    genResultsEmailHtml();
+// Generates HTML version of resutls for email
+    results.emailHTML = genResultsEmailHtml();
+
+// adds event listener to form submit button
+document.querySelector('.ohq-after-results-submit').addEventListener('click', function(){
+
+// updates hidden text field's value, and triggers change event, so that change in value is caught by ninja forms, which uses something called 'backbone' to catch those changes
+jQuery('.ohq-ninja-form-html').val(results.emailHTML).trigger('change');
+console.log(document.querySelector('.ohq-ninja-form-html').value);
+
+});
+
+
+
+
 
     function resultsCopy() {
 
@@ -206,7 +235,7 @@ resultsEmail.speechSectionSubhead = "Words you may struggle to hear:";
 
         console.log(iconArray);
 
-        var emailHTML = "<table width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"background-color: #d3d3d3; font-family: arial, sans-serif;\"><tr><td><table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"600px\" style=\"border-collapse: collapse; background-color: #ffffff; padding: 20px 20px 20px 20px;\" ><tr align=\"center\"><td bgcolor=\"#ffffff\" style=\"padding: 10px 10px 10px 10px; \"><img src=\"AGXHearing_Logo.png\" style=\"display: block;\" width=\"150px\"/></td></tr><tr align=\"center\"><td bgcolor=\"#ffffff\" style=\"padding: 0px 10px 0px 10px; \"><p width=\"100%\" style=\"display: block; font-size: 30px;\"><strong>Your AGX Hearing Quiz Results</strong></p></td></tr><tr><td bgcolor=\"#ffffff\" style=\"padding: 10px 10px 10px 10px;\">";
+        var emailHTML = "<table width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"background-color: #d3d3d3; font-family: arial, sans-serif;\"><tr><td><table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"600px\" style=\"border-collapse: collapse; background-color: #ffffff; padding: 20px 20px 20px 20px;\" ><tr align=\"center\"><td bgcolor=\"#ffffff\" style=\"padding: 10px 10px 10px 10px; \"><img src=\"" + resultsEmail.agxlogoSrc + "\" style=\"display: block;\" width=\"150px\"/></td></tr><tr align=\"center\"><td bgcolor=\"#ffffff\" style=\"padding: 0px 10px 0px 10px; \"><p width=\"100%\" style=\"display: block; font-size: 30px;\"><strong>Your AGX Hearing Quiz Results</strong></p></td></tr><tr><td bgcolor=\"#ffffff\" style=\"padding: 10px 10px 10px 10px;\">";
 
         // ** 1. Answer Arrays to Bullets
 
@@ -360,5 +389,6 @@ console.log("iconCount = " + iconCount);
             return allIconBlocks;
         };
         console.log(emailHTML);
+        return emailHTML;
     };
 }])
