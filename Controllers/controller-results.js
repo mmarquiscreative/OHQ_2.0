@@ -2,7 +2,7 @@ angular.module('formApp').controller('resultsController', ['$scope', 'resultsObj
 
     // Uses keyword to keep $scope specific to this controller
     var results = this;
-    
+
     //// ---- VARIABLES ---- ////
     results.wrongAns = resultsObj;
     results.wrongAns.speechAnsClean = removeDuplicates(results.wrongAns.speechAns);
@@ -12,7 +12,7 @@ angular.module('formApp').controller('resultsController', ['$scope', 'resultsObj
     results.cta_text = resultsObj.cta_text;
     console.log(results.cta_url);
     results.cta_url = resultsObj.cta_url;
-results.scoreSummaryTxt = '';
+    results.scoreSummaryTxt = '';
     results.totalScore = {
         name: 'totalScore',
         percentScore: 0,
@@ -74,34 +74,34 @@ results.scoreSummaryTxt = '';
     rotateFill('toneScore');
     rotateFill('speechScore');
 
-// updates ng-show variables so that form on 'x' click is email results form
-                resultsObj.formAfterResults = true;
-                resultsObj.formBeforeResults = false;
-                console.log('formAfter is ' +  resultsObj.formAfterResults);
-                console.log('formBefore is ' + resultsObj.formBeforeResults);
-                
-// updates angularJS so ng-show change is noted and forms actually switch
-setTimeout(function(){
-                // 2. compare answers to key
- $scope.$apply(function(){
-                console.log('apply ng-show change for exit');
-            });
-            }, 100);
-            
-            
+    // updates ng-show variables so that form on 'x' click is email results form
+    resultsObj.formAfterResults = true;
+    resultsObj.formBeforeResults = false;
+    console.log('formAfter is ' + resultsObj.formAfterResults);
+    console.log('formBefore is ' + resultsObj.formBeforeResults);
+
+    // updates angularJS so ng-show change is noted and forms actually switch
+    setTimeout(function () {
+        // 2. compare answers to key
+        $scope.$apply(function () {
+            console.log('apply ng-show change for exit');
+        });
+    }, 100);
+
+
     resultsCopy();
 
-// Generates HTML version of resutls for email
+    // Generates HTML version of resutls for email
     results.emailHTML = genResultsEmailHtml();
 
-// adds event listener to form submit button
-document.querySelector('.ohq-after-results-submit').addEventListener('click', function(){
+    // adds event listener to form submit button
+    document.querySelector('.ohq-after-results-submit').addEventListener('click', function () {
 
-// updates hidden text field's value, and triggers change event, so that change in value is caught by ninja forms, which uses something called 'backbone' to catch those changes
-jQuery('.ohq-ninja-form-html').val(results.emailHTML).trigger('change');
-console.log(document.querySelector('.ohq-ninja-form-html').value);
+        // updates hidden text field's value, and triggers change event, so that change in value is caught by ninja forms, which uses something called 'backbone' to catch those changes
+        jQuery('.ohq-ninja-form-html').val(results.emailHTML).trigger('change');
+        console.log(document.querySelector('.ohq-ninja-form-html').value);
 
-});
+    });
 
 
 
@@ -205,7 +205,7 @@ console.log(document.querySelector('.ohq-ninja-form-html').value);
     function genResultsEmailHtml() {
         var resultsEmail = resultsObj.resultsEmail;
 
-        
+
         console.log(results);
         // update quiz percent and array
         resultsEmail.quizPercent = results.quizScore.percentScore;
@@ -215,12 +215,12 @@ console.log(document.querySelector('.ohq-ninja-form-html').value);
         // update tone percent and array
         resultsEmail.freqPercent = results.toneScore.percentScore;
         resultsEmail.freqMissed = results.wrongAns.toneAns;
-resultsEmail.freqSectionSubhead = "Frequencies you may struggle to hear:";
+        resultsEmail.freqSectionSubhead = "Frequencies you may struggle to hear:";
 
         // update speech percent and array
         resultsEmail.speechPercent = results.speechScore.percentScore;
         resultsEmail.speechMissed = results.wrongAns.speechAnsClean;
-resultsEmail.speechSectionSubhead = "Words you may struggle to hear:";
+        resultsEmail.speechSectionSubhead = "Words you may struggle to hear:";
 
         console.log(resultsEmail);
 
@@ -276,7 +276,7 @@ resultsEmail.speechSectionSubhead = "Words you may struggle to hear:";
 
         emailHTML = (emailHTML + ctaHTML);
 
-      
+
 
 
         // ** 4. Build out member logo section HTML
@@ -285,22 +285,22 @@ resultsEmail.speechSectionSubhead = "Words you may struggle to hear:";
 
         emailHTML = (emailHTML + logoSectionBuild);
 
-  // ** 4. Build out IconLink section HTML
+        // ** 4. Build out IconLink section HTML
 
         // count icons being used
         var iconCount = countIcons();
-console.log("iconCount = " + iconCount);
+        //console.log("iconCount = " + iconCount);
         // set icon td width
         var iconBlockWidth = 30;
         iconWidthCalc();
 
         // build icon links
         var iconBlocks = iconBlockBuild(iconArray[0]);
-        console.log(iconBlocks);
+        //console.log(iconBlocks);
 
         // combine into section
         var allIconBlocks = assembleIconBlocks();
-        console.log(allIconBlocks);
+        //console.log(allIconBlocks);
 
         var iconSectionBuild = ("<table bgcolor=\"#512D6D\"  align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"border-collapse= collapse; padding: 0;\"><tr align=\"center\" height=\"120px\"style=\"color: #ffffff; font-size: 20px;\">" + allIconBlocks + "</tr></table></td></tr></table></td></tr></table>");
 
@@ -312,7 +312,7 @@ console.log("iconCount = " + iconCount);
             var returnString = ("<table align=\"center\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"border-collapse: collapse;\"><tr><td bgcolor=\"" + sectionColor + "\" width=\"15%\" align=\"center\" style=\"color: #ffffff; font-size: 30px; padding: 10px 10px 10px 10px; border-bottom: 3px solid " + sectionShade + ";\"><strong>" + sectionPercent + "</strong>%</td><td width=\"85%\" align=\"left\" style=\"color: " + sectionShade + "; font-size: 25px; padding: 10px 10px 10px 10px;\">" + sectionName + "</td></tr><tr><td  width=\"15%\" align=\"center\" style=\"font-size: 30px;\">&nbsp;</td><td bgcolor=\"#ffffff\" width=\"85%\" align=\"left\" style=\"color: #000000; font-size: 15px; padding: 10px 10px 5px 10px; border-top: 3px solid " + sectionShade + ";\"><strong>" + sectionSubhead + "</strong></td></tr><tr><td >&nbsp;</td><td align=\"left\" style=\"color: #000000; font-size: 15px; padding: 0px 8px 8px 8px;\">" + sectionBullets + "</td></tr></table>");
 
             emailHTML = (emailHTML + returnString);
-            
+
 
 
         };
@@ -332,7 +332,7 @@ console.log("iconCount = " + iconCount);
         function iconBlockBuild(iconLinkObject) {
 
             var returnString = ("<td width=\"" + iconBlockWidth + "%\"><a href=\"" + iconLinkObject.url + "\" target = \"_blank\" style=\" color: #ffffff;\"><img src=\"" + iconLinkObject.iconSrc + "\" style=\"display: block; text-decoration: none;\"/>" + iconLinkObject.txt + "</a></td>");
-            console.log(returnString);
+            //console.log(returnString);
             return returnString;
         }
 
@@ -373,13 +373,13 @@ console.log("iconCount = " + iconCount);
             var fillerHTML = "<td width=\"" + iconBlockWidth + "%\">&nbsp;</td>";
 
             iconArray.forEach(function (cur) {
-            console.log(cur)
+                console.log(cur)
                 if (cur.url.length > 0) {
                     tempTxt = iconBlockBuild(cur);
                     allIconBlocks = (allIconBlocks + tempTxt);
                 };
-                console.log("iconCount is " + iconCount);
-                console.log("allIconBlocks is " + allIconBlocks);
+                //console.log("iconCount is " + iconCount);
+                //console.log("allIconBlocks is " + allIconBlocks);
             });
 
             if (iconCount === 2) {
@@ -388,7 +388,9 @@ console.log("iconCount = " + iconCount);
 
             return allIconBlocks;
         };
+
         console.log(emailHTML);
+
         return emailHTML;
     };
 }])

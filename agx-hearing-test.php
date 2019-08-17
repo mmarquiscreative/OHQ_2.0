@@ -60,7 +60,7 @@ $ohq_email_ctaTxt = get_option('email_ctaTxt');
 			<div id="ohq-overlay-parent" class="hidden" ng-class="stage.modalClass" ><div id="ohq-overlay" ></div></div>
   <p style="display: none;" id="cta_text">';
     echo $cta_text;
-    echo '</p> <p style="display: block;" id="cta_url">';
+    echo '</p> <p style="display: none;" id="cta_url">';
     echo $agx_useNinjaForm[0];
     echo '</p> <p style="display: none;" id="ohq_email_ctaTxt">';
     echo $ohq_email_ctaTxt;
@@ -88,9 +88,9 @@ $ohq_email_ctaTxt = get_option('email_ctaTxt');
 
  /* echo do_shortcode('[ninja_form id='.$ninjaNum.']'); */
 echo '<div ng-class="stage.testBool(\'exit\') ? \'visible\' : \'hidden\'">
-       <div class="exit-body">a
-       <div  id="ohqResultsEmailForm">b<div  ng-show="stage.resultsObj.formAfterResults" >c
-       <h3>Form 1 NOT READY TO SPEAK TO A HEARING EXPERT?</h3>
+       <div class="exit-body">
+       <div  id="ohqResultsEmailForm"><div  ng-show="stage.resultsObj.formAfterResults" >
+       <h3>NOT READY TO SPEAK TO A HEARING EXPERT?</h3>
        <p>Get your hearing quiz results emailed to you and learn more about better hearing.</p>';
        
    echo do_shortcode('[ninja_form id='.$ninjaNum_results.']'); 
@@ -98,12 +98,12 @@ echo '<div ng-class="stage.testBool(\'exit\') ? \'visible\' : \'hidden\'">
     echo '<div class="disclaimer">By entering your email address you agree to share your email with xxPracticeNamexx.</div></div>';
     
     echo '<div  ng-show="stage.resultsObj.formBeforeResults"  ><div id="ohqResultsEmailForm">
-       <h3>ninja form 2</h3>
-       <p>Sign up for our enewsletter?</p>
+       <h3>Would you like more information about hearing loss?</h3>
+       <p>Enter your email to subscribe to our monthly eNewsletter!</p>
     ';
     echo do_shortcode('[ninja_form id='.$ninjaNum_subscribe.']');
     
-    echo '<div class="disclaimer">By entering your email address you agree to share your email with xxPracticeNamexx.</div></div></div></div>';
+    echo '<div class="disclaimer">By entering your email address you agree to share your email with xxPracticeNamexx via this online form.</div></div></div></div>';
     
     echo '</div></div>
       <!-- modular display buttons -->
